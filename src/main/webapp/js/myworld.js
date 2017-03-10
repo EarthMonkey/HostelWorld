@@ -3,10 +3,12 @@
  */
 
 var INIT = [1, 0, 0, 0];  // 用来判断是否第一次加载数据
+var USER_INFO;  // 用来存储user对象
+var USER_ID;
 
 window.onload = function () {
+    getUserInfo();
     initMyOrder();
-    initAccount(); //////
 };
 
 // 子导航
@@ -36,6 +38,29 @@ function changeTab(index) {
 
     INIT[index] = 1;
     LAST_TAB = index;
+}
+
+// userInfo
+function getUserInfo() {
+
+    $.ajax({
+        type: "POST",
+        url: "/user/getUserInfo",
+        success: function (resp) {
+            if (resp.status == true) {
+                USER_INFO = resp.object;
+                USER_ID = resp.info;
+
+                var spans = $(".info_div").find("span");
+                $(spans[0]).html(USER_INFO.username);
+                spans[1].innerHTML = USER_INFO.sex + "，" + USER_INFO.birth + "，" + USER_INFO.level;
+            }
+        },
+        error: function () {
+            alert("获取用户信息失败")
+        }
+    });
+
 }
 
 // 我的预定
@@ -118,9 +143,9 @@ function initBill() {
 function initAccount() {
 
     var username = $("#myAccount").find("input")[0];
-    username.value = "李昊朔";
+    username.value = USER_INFO.username;
 
-    var sex = "男";  ////
+    var sex = USER_INFO.sex;  ////
     var sexlbl = $("#myAccount").find("label");
     if (sex == "男") {
         $(sexlbl[0]).show();
@@ -129,25 +154,25 @@ function initAccount() {
     }
 
     var userId = $("#myAccount").find(".name_div").find("span")[0];
-    userId.value = "7654321";
+    userId.innerHTML = USER_ID;
 
     var info = $("#myAccount").find(".each_info");
     var birth = $(info[0]).find("input")[0];
-    birth.value = "1996-11-29";
+    birth.value = USER_INFO.birth;
     var phone = $(info[0]).find("input")[1];
-    phone.value = "15250928032";
+    phone.value = USER_INFO.phone;
     var mail = $(info[0]).find("input")[2];
-    mail.value = "howSurely@foxmail.com";
+    mail.value = USER_INFO.email;
     var credit = $(info[1]).find("input")[0];
-    credit.value = "633333333333";
+    credit.value = USER_INFO.bankcard;
 
-    var cost = 2345; ////
+    var cost = 0; ////
     var spans = $(info[2]).find("span");
     spans[0].innerHTML = cost;
     spans[1].innerHTML = Math.floor(cost / 100);
-    spans[2].innerHTML = "黄金会员";
+    spans[2].innerHTML = USER_INFO.level;
     spans[3].innerHTML = 1000;
-    spans[4].innerHTML = "钻石会员";
+    spans[4].innerHTML = "黄金会员";
 }
 
 var infoOld = ["", "", "", "", ""]; //用户名, 性别, 生日, 手机号, 邮箱
@@ -219,8 +244,26 @@ function confirmAccount() {
     }
 
     // 更新数据库
-    $($(".mod_btn")[0]).show();
-    $(".mod_con").hide();
+    $.ajax({
+        type: "POST",
+        url: "/user/updateInfo",
+        data: {
+            username: infoNew[0],
+            sex: infoNew[1],
+            birth: infoNew[2],
+            phone: infoNew[3],
+            email: infoNew[4]
+        },
+        success: function () {
+            $($(".mod_btn")[0]).show();
+            $(".mod_con").hide();
+        },
+        error: function () {
+            alert("更新失败");
+        }
+    });
+
+
 }
 
 function cancelAccount() {
@@ -254,7 +297,7 @@ function cancelAccount() {
 
 var creditOld = "";
 function changeCredit() {
-    
+
     var input = $($("#myAccount").find(".each_info")[1]).find("input");
     input.addClass("mod_state");
     input.removeAttr("readonly");
@@ -269,16 +312,27 @@ function confirmCredit() {
     if (creditNew == "") {
         return;
     }
-    
+
     input.removeClass("mod_state");
     input.attr("readonly", "readonly");
 
     creditOld = "";
 
     // 存储
-    
-    $(".credit_con").hide();
-    $($(".exchange_card")[0]).show();
+    $.ajax({
+        type: "POST",
+        url: "/user/updateBankcard",
+        data: {
+            bankcard: creditNew
+        },
+        success: function () {
+            $(".credit_con").hide();
+            $($(".exchange_card")[0]).show();
+        },
+        error: function () {
+            alert("换卡失败");
+        }
+    });
 }
 
 function cancelCredit() {

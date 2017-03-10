@@ -15,4 +15,10 @@ public interface UserDao {
     void setBalance(int userId, double balance);
 
     RespInfo getPwd(int userId);
+
+    User getUserInfo(int userId);
+
+    void updateUserInfo(User user);
+
+    void updateBankcard(int userId, String bankcard);
 }

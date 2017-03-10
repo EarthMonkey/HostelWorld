@@ -39,9 +39,9 @@ public class UserServiceImpl implements UserService {
     public RespInfo userLogin(int userId, String pwd) {
 
         RespInfo respInfo = userDao.getPwd(userId);
-        if (respInfo.getStatus() ==  true) {
+        if (respInfo.getStatus() == true) {
             if (respInfo.getInfo().equals(pwd)) {
-                return new RespInfo(true, "","");
+                return new RespInfo(true, "", "");
             } else {
                 return new RespInfo(false, "密码错误", "");
             }
@@ -50,7 +50,25 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public int userUpdate(User user) {
-        return 0;
+    public RespInfo getUserInfo(int userId) {
+
+        User user = userDao.getUserInfo(userId);
+        if (user != null) {
+            return new RespInfo(true, userId + "", user);
+        } else {
+            return new RespInfo(false, "无效的会员ID", "");
+        }
+    }
+
+    public void userUpdate(int userId, String username, String sex, String birth, String phone, String email) {
+
+        User user = new User("", username, phone, email, birth, sex, "");
+        user.setId(userId);
+        userDao.updateUserInfo(user);
+    }
+
+    public void updateBankcard(int userId, String bankcard) {
+
+        userDao.updateBankcard(userId, bankcard);
     }
 }

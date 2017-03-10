@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
     public void setPwd(int userId, String pwd) {
 
         Session session = sessionFactory.getCurrentSession();
-        User user = (User)session.load(User.class, userId);
+        User user = (User) session.load(User.class, userId);
         user.setPassword(pwd);
         session.update(user);
     }
@@ -37,18 +37,46 @@ public class UserDaoImpl implements UserDao {
     public void setBalance(int userId, double balance) {
 
         Session session = sessionFactory.getCurrentSession();
-        User user = (User)session.load(User.class, userId);
+        User user = (User) session.load(User.class, userId);
         user.setBalance(balance);
         session.update(user);
     }
 
     public RespInfo getPwd(int userId) {
 
-        User user = (User)sessionFactory.getCurrentSession().get(User.class, userId);
+        User user = (User) sessionFactory.getCurrentSession().get(User.class, userId);
         if (user != null) {
             return new RespInfo(true, user.getPassword(), "");
         } else {
-            return new RespInfo(false,"无效的会员卡号", "");
+            return new RespInfo(false, "无效的会员卡号", "");
         }
     }
+
+    public User getUserInfo(int userId) {
+
+        User user = (User) sessionFactory.getCurrentSession().get(User.class, userId);
+        return user;
+    }
+
+    public void updateUserInfo(User u) {
+
+        Session session = sessionFactory.getCurrentSession();
+        User user = (User) session.load(User.class, u.getId());
+        user.setUsername(u.getUsername());
+        user.setSex(u.getSex());
+        user.setBirth(u.getBirth());
+        user.setPhone(u.getPhone());
+        user.setEmail(u.getEmail());
+
+        session.update(user);
+    }
+
+    public void updateBankcard(int userId, String bankcard) {
+        Session session = sessionFactory.getCurrentSession();
+        User user = (User) session.load(User.class, userId);
+        user.setBankcard(bankcard);
+
+        session.update(user);
+    }
 }
+

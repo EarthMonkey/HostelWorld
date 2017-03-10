@@ -1,9 +1,6 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -18,6 +15,7 @@ public class MyOrder implements Serializable {
     @GeneratedValue
     private int id;
 
+    @Column(name = "userId")
     private int userId;
     private String hostelname;
     private String location;

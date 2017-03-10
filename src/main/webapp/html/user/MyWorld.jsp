@@ -38,8 +38,8 @@
         </div>
 
         <div class="info_div">
-            <span style="font-size: 24px; color: #2b2b2b;">howSure</span><br>
-            <span>男, 20, 大众会员</span>
+            <span style="font-size: 24px; color: #2b2b2b;"></span><br>
+            <span></span>
         </div>
     </div>
 

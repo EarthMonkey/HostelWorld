@@ -25,7 +25,7 @@ public class User implements Serializable {
     private String birth;
     private String sex;
     private String bankcard;
-    private String level;
+    private String level = "大众会员";
     private double balance;
     private int point;
 

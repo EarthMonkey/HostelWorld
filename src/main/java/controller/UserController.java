@@ -1,6 +1,7 @@
 package controller;
 
 import model.RespInfo;
+import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,5 +55,24 @@ public class UserController {
             session.setAttribute("userId", userId);
         }
         return respInfo;
+    }
+
+    @RequestMapping("/getUserInfo")
+    public RespInfo getUserInfo(HttpSession session) {
+
+        int userId = (Integer) session.getAttribute("userId");
+        return userService.getUserInfo(userId);
+    }
+
+    @RequestMapping("/updateInfo")
+    public void updateUserInfo(HttpSession session, @RequestParam String username, @RequestParam String sex, @RequestParam String birth, @RequestParam String phone, @RequestParam String email) {
+        int userId = (Integer) session.getAttribute("userId");
+        userService.userUpdate(userId, username, sex, birth, phone, email);
+    }
+
+    @RequestMapping("/updateBankcard")
+    public void updateBankcard(HttpSession session, @RequestParam String bankcard) {
+        int userId = (Integer) session.getAttribute("userId");
+        userService.updateBankcard(userId, bankcard);
     }
 }

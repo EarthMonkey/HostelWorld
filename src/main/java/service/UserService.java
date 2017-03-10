@@ -16,5 +16,9 @@ public interface UserService {
 
     RespInfo userLogin(int userId, String pwd);
 
-    int userUpdate(User user);
+    RespInfo getUserInfo(int userId);
+
+    void userUpdate(int userId, String username, String sex, String birth, String phone, String email);
+
+    void updateBankcard(int userId, String bankcard);
 }

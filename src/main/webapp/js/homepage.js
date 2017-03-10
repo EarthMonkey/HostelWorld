@@ -202,9 +202,9 @@ function userRegister() {
     var username = $(inputs[0]).val();
     var phone = $(inputs[1]).val();
     var birth = $(inputs[2]).val();
-    var sex = "woman";
+    var sex = "女";
     if (inputs[3].checked == true) {
-        sex = "man";
+        sex = "男";
     }
     BankCard = $(inputs[5]).val();
 
