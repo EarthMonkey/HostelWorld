@@ -15,7 +15,7 @@ public class HostelApply implements Serializable {
 
     private int id;
     private String applyer;
-    private int phone;
+    private String phone;
     private String email;
     private String identity;  // 身份证
     private String hostelname;
@@ -26,7 +26,7 @@ public class HostelApply implements Serializable {
     private int approverId;  // 经理Id
     private String applytype;  // 申请类型：open；modify
 
-    public HostelApply(int id, String applyer, int phone, String email, String identity, String hostelname, String location, String description, String imgurl, String approvalstate, int approverId, String applytype) {
+    public HostelApply(int id, String applyer, String phone, String email, String identity, String hostelname, String location, String description, String imgurl, String approvalstate, int approverId, String applytype) {
         this.id = id;
         this.applyer = applyer;
         this.phone = phone;
@@ -58,11 +58,11 @@ public class HostelApply implements Serializable {
         this.applyer = applyer;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

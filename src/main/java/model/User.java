@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -12,10 +13,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
+
+    @Id
+    @GeneratedValue
     private int id;
+
     private String password;
     private String username;
-    private int phone;
+    private String phone;
     private String email;
     private String birth;
     private String sex;
@@ -24,8 +29,11 @@ public class User implements Serializable {
     private double balance;
     private int point;
 
-    public User(int id, String password, String username, int phone, String email, String birth, String sex, String bankcard, String level, double balance, int point) {
-        this.id = id;
+    public User() {
+
+    }
+
+    public User(String password, String username, String phone, String email, String birth, String sex, String bankcard) {
         this.password = password;
         this.username = username;
         this.phone = phone;
@@ -33,12 +41,8 @@ public class User implements Serializable {
         this.birth = birth;
         this.sex = sex;
         this.bankcard = bankcard;
-        this.level = level;
-        this.balance = balance;
-        this.point = point;
     }
 
-    @Id
     public int getId() {
         return id;
     }
@@ -63,11 +67,11 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

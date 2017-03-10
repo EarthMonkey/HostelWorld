@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -13,7 +14,10 @@ import java.io.Serializable;
 @Table(name = "myorder")
 public class MyOrder implements Serializable {
 
+    @Id
+    @GeneratedValue
     private int id;
+
     private int userId;
     private String hostelname;
     private String location;
@@ -22,12 +26,12 @@ public class MyOrder implements Serializable {
     private String checkintime;
     private String leavetime;
     private double pay;
-    private int phone;
+    private String phone;
     private String username;
     private String orderstate;   // 历史预定：history；future
     private String checkstate;   // 是否已入住： checked；unchecked
 
-    public MyOrder(int id, int userId, String hostelname, String location, String room, String ordertime, String checkintime, String leavetime, double pay, int phone, String username, String orderstate, String checkstate) {
+    public MyOrder(int id, int userId, String hostelname, String location, String room, String ordertime, String checkintime, String leavetime, double pay, String phone, String username, String orderstate, String checkstate) {
         this.id = id;
         this.userId = userId;
         this.hostelname = hostelname;
@@ -43,7 +47,6 @@ public class MyOrder implements Serializable {
         this.checkstate = checkstate;
     }
 
-    @Id
     public int getId() {
         return id;
     }
@@ -116,11 +119,11 @@ public class MyOrder implements Serializable {
         this.pay = pay;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

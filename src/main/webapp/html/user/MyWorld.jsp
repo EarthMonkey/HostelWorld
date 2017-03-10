@@ -80,7 +80,7 @@
                     <div class="tip_con">退房时间：<span class="content">2017-2-19 14:00</span></div>
                 </div>
                 <div>
-                    <div class="tip_con" style="margin-right: 35px;">房间类型：<span class="content">单人间标准房</span></div>
+                    <div class="tip_con" style="margin-right: 35px;">房间信息：<span class="content">单人间标准房</span></div>
                     <div class="tip_con" style="margin-right: 35px;">支付金额：<span class="content">600</span>元</div>
                     <div class="tip_con" style="margin-right: 35px;">预留手机号：<span class="content">15250997793</span>
                     </div>

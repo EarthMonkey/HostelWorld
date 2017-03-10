@@ -19,12 +19,12 @@ public class HostelInfo implements Serializable {
     private String location;
     private String description;
     private String ownername;
-    private int phone;
+    private String phone;
     private String email;
     private String notice;
     private int roomcount;
 
-    public HostelInfo(int id, String password, String name, String location, String description, String ownername, int phone, String email, String notice, int roomcount) {
+    public HostelInfo(int id, String password, String name, String location, String description, String ownername, String phone, String email, String notice, int roomcount) {
         this.id = id;
         this.password = password;
         this.name = name;
@@ -86,11 +86,11 @@ public class HostelInfo implements Serializable {
         this.ownername = ownername;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

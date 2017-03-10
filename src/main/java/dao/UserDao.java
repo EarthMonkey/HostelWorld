@@ -1,7 +1,18 @@
 package dao;
 
+import model.RespInfo;
+import model.User;
+
 /**
  * Created by L.H.S on 2017/3/9.
  */
 public interface UserDao {
+
+    int insert(User user);
+
+    void setPwd(int userId, String pwd);
+
+    void setBalance(int userId, double balance);
+
+    RespInfo getPwd(int userId);
 }

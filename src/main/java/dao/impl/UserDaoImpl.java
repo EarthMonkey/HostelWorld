@@ -1,7 +1,54 @@
 package dao.impl;
 
+import dao.UserDao;
+import model.RespInfo;
+import model.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 /**
  * Created by L.H.S on 2017/3/9.
  */
-public class UserDaoImpl {
+
+@Repository
+public class UserDaoImpl implements UserDao {
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    public int insert(User user) {
+
+        sessionFactory.getCurrentSession().save(user);
+        int userId = user.getId();
+
+        return userId;
+    }
+
+    public void setPwd(int userId, String pwd) {
+
+        Session session = sessionFactory.getCurrentSession();
+        User user = (User)session.load(User.class, userId);
+        user.setPassword(pwd);
+        session.update(user);
+    }
+
+    public void setBalance(int userId, double balance) {
+
+        Session session = sessionFactory.getCurrentSession();
+        User user = (User)session.load(User.class, userId);
+        user.setBalance(balance);
+        session.update(user);
+    }
+
+    public RespInfo getPwd(int userId) {
+
+        User user = (User)sessionFactory.getCurrentSession().get(User.class, userId);
+        if (user != null) {
+            return new RespInfo(true, user.getPassword(), "");
+        } else {
+            return new RespInfo(false,"无效的会员卡号", "");
+        }
+    }
 }

@@ -63,9 +63,36 @@ function login(id) {
         return;
     }
 
-    var href = ["user/UserOrder.jsp", "hostel/HostelBusiness.jsp", "Approval.jsp"];
+    // var href = ["user/UserOrder.jsp", "hostel/HostelBusiness.jsp", "Approval.jsp"];
+    if (index == 0) {
+        var userInputs = $("#userLogin").find("input");
+        var userId = userInputs[0].value;
+        var pwd = userInputs[1].value;
 
-    window.location.href = href[index];
+        $.ajax({
+            type: "POST",
+            url: "/user/Login",
+            data: {
+                userId: userId,
+                pwd: pwd
+            },
+            success: function (resp) {
+                if (resp.status == true) {
+                    location.href = "user/UserOrder.jsp";
+                } else {
+                    err_lbl.innerHTML = resp.info;
+                    userInputs[0].parentNode.appendChild(err_lbl);
+                    $(userInputs[0]).focus(function () {
+                        $(err_lbl).remove();
+                    });
+                }
+            },
+            error: function () {
+                alert("登录失败");
+            }
+        });
+    }
+
 }
 
 function confirmBank() {
@@ -126,35 +153,88 @@ function modifyBank() {
 }
 
 var creditId;
+var BankCard;
 
 // 注册会员卡——下一步
 function nextStep(index) {
 
     if (index == 1) {
         // 填写信息后
-        $($("#creditApply").find("img"))[0].src = "../image/step_2.png";
-        $("#step1").hide();
-        $("#step2").show();
-        creditId = "1234567";
-        $("#step2")[0].getElementsByTagName("span")[0].innerHTML = creditId;
+        userRegister();
 
     } else if (index == 2) {
         // 注册会员卡后
-        $($("#creditApply").find("img"))[0].src = "../image/step_3.png";
-        $("#step2").hide();
-        $("#step3").show();
-        $("#step3").find(".id_div").find("span")[0].innerHTML = creditId;
+        setUserPwd(0);
+
     } else if (index == 3) {
         // 充值后
 
-        $($("#creditApply").find("img"))[0].src = "../image/step_4.png";
-
-        toLogin("#step3")
+        var balInput = $("#step3").find("input")[0];
+        var balance = balInput.value;
+        if (balance > 2000) {
+            err_lbl.innerHTML = "余额不足";
+            balInput.parentNode.appendChild(err_lbl);
+            $(balInput).focus(function () {
+                $(err_lbl).remove();
+            });
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/user/setBalance",
+            data: {
+                balance: balance
+            },
+            success: function () {
+                $($("#creditApply").find("img"))[0].src = "../image/step_4.png";
+                toLogin("#step3");
+            },
+            error: function () {
+                alert("充值失败");
+            }
+        });
     }
 }
 
+function userRegister() {
+
+    var inputs = $("#step1").find("input");
+    var username = $(inputs[0]).val();
+    var phone = $(inputs[1]).val();
+    var birth = $(inputs[2]).val();
+    var sex = "woman";
+    if (inputs[3].checked == true) {
+        sex = "man";
+    }
+    BankCard = $(inputs[5]).val();
+
+    $.ajax({
+        type: "POST",
+        url: "/user/register",
+        data: {
+            password: "",
+            username: username,
+            phone: phone,
+            birth: birth,
+            sex: sex,
+            bankcard: BankCard
+        },
+        success: function (result) {
+            creditId = result;
+            $($("#creditApply").find("img"))[0].src = "../image/step_2.png";
+            $("#step1").hide();
+            $("#step2").show();
+            $("#step2")[0].getElementsByTagName("span")[0].innerHTML = creditId;
+        },
+        error: function () {
+            alert("注册失败");
+        }
+    });
+}
+
 // 设置会员卡密码
-function setUserPwd() {
+// syb=0：下一步；syb=1：不激活
+function setUserPwd(syb) {
 
     var pwd = $("#step2").find("input")[0];
     if (pwd.value == "") {
@@ -176,7 +256,30 @@ function setUserPwd() {
         return;
     }
 
-    toLogin("#step2")
+    var password = pwd.value;
+    $.ajax({
+        type: "POST",
+        url: "/user/setPwd",
+        data: {
+            pwd: password
+        },
+        success: function () {
+
+            if (syb == 0) {
+                $($("#creditApply").find("img"))[0].src = "../image/step_3.png";
+                $("#step2").hide();
+                $("#step3").show();
+                $("#step3").find(".id_div").find("span")[0].innerHTML = creditId;
+                $("#step3").find(".each_bank").html(BankCard)
+            } else {
+                toLogin("#step2");
+            }
+
+        },
+        error: function () {
+            alert("设置密码失败")
+        }
+    });
 }
 
 function toLogin(id) {

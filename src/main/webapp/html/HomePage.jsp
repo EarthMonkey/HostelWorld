@@ -142,7 +142,7 @@
             <div class="note_div">注意:会员卡在充值至少1000元后才能激活使用，您可以选择立即充值，也可以在一年内激活</div>
 
             <div style="width: 230px; margin: 30px auto;">
-                <div class="step_btn" style="margin-right: 20px;" onclick="setUserPwd()">
+                <div class="step_btn" style="margin-right: 20px;" onclick="setUserPwd(1)">
                     完成
                 </div>
                 <div class="step_btn" style="background-color: #32af32" onclick="nextStep(2)">下一步</div>
@@ -163,17 +163,9 @@
                 <input class="input_text" type="text" placeholder="大于等于1000">
             </div>
 
-            <div class="tip_div">请选择银行卡</div>
+            <div class="tip_div">充值银行卡</div>
             <div class="banks_div" style="margin-top: -5px; border-bottom: none;">
-                <div class="each_bank">
-                    <input id="bank1" type="radio" name="bank" value="6222222222222">
-                    <label for="bank1">6222222222222</label>
-                </div>
-
-                <div class="each_bank">
-                    <input id="bank2" type="radio" name="bank" value="6333333333333">
-                    <label for="bank2">6333333333333</label>
-                </div>
+                <div class="each_bank" style="padding-left: 5px; box-sizing: border-box;"></div>
             </div>
 
             <div style="width: 230px; margin: 30px auto;">
