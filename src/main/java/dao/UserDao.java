@@ -21,4 +21,6 @@ public interface UserDao {
     void updateUserInfo(User user);
 
     void updateBankcard(int userId, String bankcard);
+
+    RespInfo getManagerPwd(int managerId);
 }

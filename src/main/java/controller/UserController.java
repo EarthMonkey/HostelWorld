@@ -50,7 +50,7 @@ public class UserController {
     public RespInfo login(HttpSession session, @RequestParam int userId, @RequestParam String pwd) {
 
         RespInfo respInfo = userService.userLogin(userId, pwd);
-        if (respInfo.getStatus() == true) {
+        if (respInfo.getStatus()) {
             session.setAttribute("userId", userId);
         }
         return respInfo;
@@ -74,4 +74,5 @@ public class UserController {
         int userId = (Integer) session.getAttribute("userId");
         userService.updateBankcard(userId, bankcard);
     }
+
 }

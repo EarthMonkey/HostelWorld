@@ -63,12 +63,11 @@ function login(id) {
         return;
     }
 
+    var userId = inputDiv[0].value;
+    var pwd = inputDiv[1].value;
+
     // var href = ["user/UserOrder.jsp", "hostel/HostelBusiness.jsp", "Approval.jsp"];
     if (index == 0) {
-        var userInputs = $("#userLogin").find("input");
-        var userId = userInputs[0].value;
-        var pwd = userInputs[1].value;
-
         $.ajax({
             type: "POST",
             url: "/user/Login",
@@ -81,14 +80,39 @@ function login(id) {
                     location.href = "user/UserOrder.jsp";
                 } else {
                     err_lbl.innerHTML = resp.info;
-                    userInputs[0].parentNode.appendChild(err_lbl);
-                    $(userInputs[0]).focus(function () {
+                    inputDiv[0].parentNode.appendChild(err_lbl);
+                    $(inputDiv[0]).focus(function () {
                         $(err_lbl).remove();
                     });
                 }
             },
             error: function () {
                 alert("登录失败");
+            }
+        });
+    } else if (index == 1) {
+        // 客栈登录
+
+
+    } else {
+
+        $.ajax({
+            type: "POST",
+            url: "/myManager/Login",
+            data: {
+                managerId: userId,
+                pwd: pwd
+            },
+            success: function (resp) {
+                if (resp.status == true) {
+                    location.href = "Approval.jsp"
+                } else {
+                    err_lbl.innerHTML = resp.info;
+                    inputDiv[0].parentNode.appendChild(err_lbl);
+                    $(inputDiv[0]).focus(function () {
+                        $(err_lbl).remove();
+                    });
+                }
             }
         });
     }
@@ -324,18 +348,43 @@ function hostelApply() {
     });
 }
 
-var hostelId;
+var hostelId;    // applyId
+var regId;
 // 客栈注册
 function checkCode(index) {
 
     if (index == 1) {
         // 验证注册码
+        var codeInput = $("#regStep1").find("input");
 
-        $("#regStep1").hide();
-        $("#regStep2").show();
+        $.ajax({
+            type: "POST",
+            url: "/hostel/checkCode",
+            data: {
+                checkcode: codeInput.val()
+            },
+            success: function (resp) {
+                if (resp.status == true) {
 
-        hostelId = "7654321";
-        $("#regStep2").find(".id_div").find("span")[0].innerHTML = hostelId;
+                    hostelId = resp.object.applyId;
+                    regId = resp.object.id;
+
+                    $("#regStep1").hide();
+                    $("#regStep2").show();
+                    $("#regStep2").find(".id_div").find("span")[0].innerHTML = hostelId;
+                } else {
+                    err_lbl.innerHTML = resp.info;
+                    codeInput[0].parentNode.appendChild(err_lbl);
+                    codeInput.focus(function () {
+                        $(err_lbl).remove();
+                    });
+                }
+            },
+            error: function () {
+                alert("验证失败");
+            }
+        });
+
     } else {
         // 设置密码
 
@@ -359,7 +408,21 @@ function checkCode(index) {
             return;
         }
 
-        toLogin("#regStep2");
+        $.ajax({
+            type: "POST",
+            url: "/hostel/setPwd",
+            data: {
+                regId: regId,
+                applyId: hostelId,
+                pwd: pwd.value
+            },
+            success: function () {
+                alert(1);
+                toLogin("#regStep2");
+            },
+            error: function () {
+                alert("设置密码失败");
+            }
+        });
     }
-
 }

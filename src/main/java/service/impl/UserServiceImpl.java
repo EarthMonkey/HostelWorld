@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public RespInfo userLogin(int userId, String pwd) {
 
         RespInfo respInfo = userDao.getPwd(userId);
-        if (respInfo.getStatus() == true) {
+        if (respInfo.getStatus()) {
             if (respInfo.getInfo().equals(pwd)) {
                 return new RespInfo(true, "", "");
             } else {
@@ -70,5 +70,19 @@ public class UserServiceImpl implements UserService {
     public void updateBankcard(int userId, String bankcard) {
 
         userDao.updateBankcard(userId, bankcard);
+    }
+
+    public RespInfo managerLogin(int managerId, String pwd) {
+
+        RespInfo respInfo = userDao.getManagerPwd(managerId);
+        if (respInfo.getStatus()) {
+            if (respInfo.getInfo().equals(pwd)) {
+                return new RespInfo(true, respInfo.getObject().toString(), "");
+            } else {
+                return new RespInfo(false, "密码错误", "");
+            }
+        } else {
+            return new RespInfo(false, respInfo.getInfo(), "");
+        }
     }
 }

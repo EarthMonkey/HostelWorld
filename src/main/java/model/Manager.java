@@ -17,6 +17,8 @@ public class Manager implements Serializable {
     private String password;
     private String imgurl;
 
+    public Manager() {}
+
     public Manager(int id, String name, String password, String imgurl) {
         this.id = id;
 

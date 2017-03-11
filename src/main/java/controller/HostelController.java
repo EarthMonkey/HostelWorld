@@ -1,5 +1,7 @@
 package controller;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+import common.RespInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +28,18 @@ public class HostelController {
                       @RequestParam String location, @RequestParam String description, @RequestParam String imgurl) {
 
         applyService.apply(applyer, phone, email, identity, hostelname, location, description, imgurl);
+    }
+
+    @RequestMapping("/checkCode")
+    public RespInfo checkCode(HttpSession session, @RequestParam String checkcode) {
+
+        return applyService.checkCode(checkcode);
+    }
+
+    @RequestMapping("/setPwd")
+    public void setPwd(HttpSession session, @RequestParam int regId, @RequestParam int applyId, @RequestParam String pwd) {
+
+        applyService.setPwd(regId, applyId, pwd);
+
     }
 }

@@ -20,4 +20,6 @@ public interface UserService {
     void userUpdate(int userId, String username, String sex, String birth, String phone, String email);
 
     void updateBankcard(int userId, String bankcard);
+
+    RespInfo managerLogin(int managerId, String pwd);
 }

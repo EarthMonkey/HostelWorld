@@ -41,4 +41,18 @@ public class HostelApplyDaoImpl implements HostelApplyDao{
 
         return list;
     }
+
+    public List<HostelApply> getHistory() {
+
+        String hql = "from HostelApply ha where ha.approvalstate<>'unchecked'";
+        List<HostelApply> list = sessionFactory.getCurrentSession().createQuery(hql).list();
+
+        return list;
+    }
+
+    public HostelApply getTheApply(int applyId) {
+
+        HostelApply ha = (HostelApply) sessionFactory.getCurrentSession().get(HostelApply.class, applyId);
+        return ha;
+    }
 }

@@ -1,5 +1,6 @@
 package service;
 
+import common.RespInfo;
 import model.HostelApply;
 
 import java.util.List;
@@ -15,5 +16,14 @@ public interface HostelApplyService {
 
     List<HostelApply> getApply();
 
+    List<HostelApply> getHistoryApply();
+
+    // 经理审批
     void updateState(int applyId, String state, int approverId);
+
+    // 验证checkcode
+    RespInfo checkCode(String checkCode);
+
+    // 设置密码
+    void setPwd(int regId, int applyId, String pwd);
 }

@@ -24,6 +24,8 @@ public class HostelInfo implements Serializable {
     private String notice;
     private int roomcount;
 
+    public HostelInfo() {}
+
     public HostelInfo(int id, String password, String name, String location, String description, String ownername, String phone, String email, String notice, int roomcount) {
         this.id = id;
         this.password = password;

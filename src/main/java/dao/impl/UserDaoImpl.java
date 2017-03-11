@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.UserDao;
 import common.RespInfo;
+import model.Manager;
 import model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -77,6 +78,16 @@ public class UserDaoImpl implements UserDao {
         user.setBankcard(bankcard);
 
         session.update(user);
+    }
+
+    public RespInfo getManagerPwd(int managerId) {
+
+        Manager manager = (Manager) sessionFactory.getCurrentSession().get(Manager.class, managerId);
+        if (manager != null) {
+            return new RespInfo(true, manager.getPassword(), manager.getName());
+        } else {
+            return new RespInfo(false, "无效的工作编号", "");
+        }
     }
 }
 
