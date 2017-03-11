@@ -1,7 +1,7 @@
 package dao.impl;
 
 import dao.UserDao;
-import model.RespInfo;
+import common.RespInfo;
 import model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

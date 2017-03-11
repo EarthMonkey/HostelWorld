@@ -39,7 +39,7 @@
 
         <div class="info_div">
             <span style="font-size: 24px; color: #2b2b2b;"></span><br>
-            <span></span>
+            <span>男, 20, 大众会员</span>
         </div>
     </div>
 
@@ -70,12 +70,13 @@
 
         <div id="futureDiv">
             <div id="record_copy" class="each_record" style="display: none;">
+                <div class="tip_con">订单号：<span>1234567</span></div>
                 <div>
                     <div class="content" style="font-size: 20px; margin-bottom: -1px; margin-right: 20px;">
-                        南京紫峰大厦xxx青年旅社
+                        <span>南京紫峰大厦xxx青年旅社</span>
                     </div>
-                    <div class="tip_con">江苏省南京市鼓楼区</div>
-                    <div class="tip_con">2017-1-20预定</div>
+                    <div class="tip_con"><span>江苏省南京市鼓楼区</span></div>
+                    <div class="tip_con"><span>2017-1-20</span>预定</div>
                     <div class="tip_con">入住时间：<span class="content">2017-2-18 14:00</span></div>
                     <div class="tip_con">退房时间：<span class="content">2017-2-19 14:00</span></div>
                 </div>
@@ -87,7 +88,7 @@
                     <div class="tip_con">预订人：<span class="content">李昊朔</span></div>
                 </div>
                 <div class="record_btn">退订</div>
-                <div class="record_btn" style="top: 33px;">修改</div>
+                <div class="record_btn" style="top: 45px;">修改</div>
             </div>
         </div>
 
@@ -100,14 +101,14 @@
         <div id="checkIn_copy" class="each_record" style="display: none;">
             <div>
                 <div class="content" style="font-size: 20px; margin-bottom: -1px; margin-right: 20px;">
-                    南京紫峰大厦xxx青年旅社
+                    <span>南京紫峰大厦xxx青年旅社</span>
                 </div>
-                <div class="tip_con">江苏省南京市鼓楼区</div>
+                <div class="tip_con"><span>江苏省南京市鼓楼区</span></div>
                 <div class="tip_con">入住时间：<span class="content">2017-2-18 14:00</span></div>
                 <div class="tip_con">退房时间：<span class="content">2017-2-19 14:00</span></div>
             </div>
             <div>
-                <div class="tip_con" style="margin-right: 35px;">房间类型：<span class="content">单人间标准房</span></div>
+                <div class="tip_con" style="margin-right: 35px;">房间信息：<span class="content">单人间标准房</span></div>
                 <div class="tip_con" style="margin-right: 35px;">支付金额：<span class="content">600</span>元</div>
                 <div class="tip_con" style="margin-right: 35px;">预留手机号：<span class="content">15250997793</span>
                 </div>

@@ -23,6 +23,8 @@ public class CheckOut implements Serializable {
     private String paytype;
     private int userId;
 
+    public CheckOut() {}
+
     public CheckOut(int roomId, String checkintime, String checkouttime, String checkinstaff, double totalpay, String ismember, String paytype, int userId) {
         this.roomId = roomId;
         this.checkintime = checkintime;

@@ -65,28 +65,58 @@ function getUserInfo() {
 
 // 我的预定
 function initMyOrder() {
-    var copy = $("#record_copy")[0];
 
-    var future = $("#futureDiv");
-    for (var i = 0; i < 2; i++) {
-        var div = document.createElement("div");
-        div.className = "each_record";
-        div.innerHTML = copy.innerHTML;
+    $.ajax({
+        type: "POST",
+        url: "/order/getFutureOrder",
+        success: function (resp) {
+            setOrder(resp, $("#futureDiv"));
+        },
+        error: function () {
+            alert("获取预定信息失败")
+        }
+    });
 
-        future.append($(div));
+    $.ajax({
+        type: "POST",
+        url: "/order/getHistoryOrder",
+        success: function (resp) {
+            setOrder(resp, $("#historyDiv"));
+            $("#historyDiv").hide();
+        },
+        error: function () {
+            alert("获取历史预定信息失败")
+        }
+    });
+}
+
+function setOrder(data, parent) {
+
+    var copy = $("#record_copy");
+
+    for (var i = 0; i < data.length; i++) {
+        var div = $("<div class='each_record'></div>");
+        div.html(copy.html());
+
+        var spans = div.find("span");
+        spans[0].innerHTML = data[i].id;
+        spans[1].innerHTML = data[i].hostelname;
+        spans[2].innerHTML = data[i].location;
+        spans[3].innerHTML = data[i].ordertime;
+        spans[4].innerHTML = data[i].checkintime;
+        spans[5].innerHTML = data[i].leavetime;
+        spans[6].innerHTML = data[i].room;
+        spans[7].innerHTML = data[i].pay;
+        spans[8].innerHTML = data[i].phone;
+        spans[9].innerHTML = data[i].username;
+
+        if (parent.attr("id") == "historyDiv") {
+            div.find(".record_btn").hide();
+        }
+
+        parent.append(div);
     }
 
-    var history = $("#historyDiv");
-    for (var j = 0; j < 4; j++) {
-        var div = document.createElement("div");
-        div.className = "each_record";
-        div.innerHTML = copy.innerHTML;
-        $($(div).find(".record_btn")[0]).hide();
-        $($(div).find(".record_btn")[1]).hide();
-
-        history.append($(div));
-        history.hide();
-    }
 }
 
 function changeMyOrder(index) {
@@ -103,41 +133,95 @@ function changeMyOrder(index) {
 function initCheckIn() {
 
     var parent = $("#checkIn");
-    var copy = $("#checkIn_copy")[0];
+    var copy = $("#checkIn_copy");
 
-    for (var j = 0; j < 4; j++) {
-        var div = document.createElement("div");
-        div.className = "each_record";
-        div.innerHTML = copy.innerHTML;
-        $($(div).find(".record_btn")[0]).hide();
-        $($(div).find(".record_btn")[1]).hide();
+    $.ajax({
+        type: "POST",
+        url: "/order/getCheckIn",
+        success: function (data) {
 
-        parent.append($(div));
-    }
+            for (var i = 0; i < data.length; i++) {
+                var div = $("<div class='each_record'></div>");
+                div.html(copy.html());
+
+                var spans = div.find("span");
+                spans[0].innerHTML = data[i].hostelname;
+                spans[1].innerHTML = data[i].location;
+                spans[2].innerHTML = data[i].checkintime;
+                spans[3].innerHTML = data[i].leavetime;
+                spans[4].innerHTML = data[i].room;
+                spans[5].innerHTML = data[i].pay;
+                spans[6].innerHTML = data[i].phone;
+                spans[7].innerHTML = data[i].username;
+
+                parent.append(div);
+            }
+
+        },
+        error: function () {
+            alert("获取入住信息失败");
+        }
+    });
 }
 
 function initBill() {
-
     var parent = $("#bill");
-    var billCopy = $("#bill_copy")[0];
-    var itemCopy = $("#item_copy")[0];
+    var billCopy = $("#bill_copy");
+    var itemCopy = $("#item_copy");
 
-    for (var i = 0; i < 3; i++) {
-        var billDiv = document.createElement("div");
-        billDiv.className = "bill_div";
-        billDiv.innerHTML = billCopy.innerHTML;
+    $.ajax({
+        type: "POST",
+        url: "/bill/getBills",
+        success: function (result) {
 
-        var itemParent = $(billDiv).find(".items_div");
-        for (var j = 0; j < 5 - i; j++) {
-            var itemDiv = document.createElement("div");
-            itemDiv.className = "each_item";
-            itemDiv.innerHTML = itemCopy.innerHTML;
+            var resp = result.object;
+            for (var i = 0; i < resp.length; i++) {
+                var billDiv = $("<div class='bill_div'></div>");
+                billDiv.html(billCopy.html());
 
-            itemParent.append($(itemDiv));
+                var timeSpans = billDiv.find("span");
+                timeSpans[0].innerHTML = resp[i][0].year;
+                timeSpans[1].innerHTML = resp[i][0].month;
+
+                var itemParent = billDiv.find(".items_div");
+                for (var j = 0; j < resp[i].length; j++) {
+
+                    var itemDiv = $("<div class='each_item'></div>");
+                    itemDiv.html(itemCopy.html());
+
+                    var itemSpans = itemDiv.find("div");
+                    itemSpans[0].innerHTML = resp[i][j].time.substr(5);
+                    itemSpans[1].innerHTML = "-" + resp[i][j].pay;
+                    itemSpans[2].innerHTML = resp[i][j].hostel;
+
+                    itemParent.append(itemDiv);
+                }
+
+                parent.append(billDiv);
+            }
+
+        },
+        error: function () {
+            alert("获取账单失败");
         }
+    });
 
-        parent.append($(billDiv));
-    }
+    // for (var i = 0; i < 3; i++) {
+    //     var billDiv = document.createElement("div");
+    //     billDiv.className = "bill_div";
+    //     billDiv.innerHTML = billCopy.innerHTML;
+    //
+    //     var itemParent = $(billDiv).find(".items_div");
+    //     for (var j = 0; j < 5 - i; j++) {
+    //         var itemDiv = document.createElement("div");
+    //         itemDiv.className = "each_item";
+    //         itemDiv.innerHTML = itemCopy.innerHTML;
+    //
+    //         itemParent.append($(itemDiv));
+    //     }
+    //
+    //     parent.append($(billDiv));
+    // }
 }
 
 function initAccount() {

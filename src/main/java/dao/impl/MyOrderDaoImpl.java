@@ -23,17 +23,27 @@ public class MyOrderDaoImpl implements MyOrderDao {
     public List<MyOrder> getMyFutureOrder(int userId) {
 
         Session session = sessionFactory.getCurrentSession();
-        String hql = "from model.MyOrder as mo where mo.userId=" + userId + " and mo.orderstate='future'";
-        session.createQuery(hql);
+        String hql = "from MyOrder mo where mo.userId=" + userId + " and mo.orderstate='future'";
+        List<MyOrder> list = session.createQuery(hql).list();
 
-        return null;
+        return list;
     }
 
     public List<MyOrder> getMyHistoryOrder(int userId) {
-        return null;
+
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "from MyOrder mo where mo.userId=" + userId + " and mo.orderstate='history'";
+        List<MyOrder> list = session.createQuery(hql).list();
+
+        return list;
     }
 
     public List<MyOrder> getMyCheckin(int userId) {
-        return null;
+
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "from MyOrder mo where mo.userId=" + userId + " and mo.checkstate='checked'";
+        List<MyOrder> list = session.createQuery(hql).list();
+
+        return list;
     }
 }

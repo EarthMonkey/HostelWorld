@@ -25,9 +25,12 @@ public class HostelApply implements Serializable {
     private String approvalstate;  // approve; inapprove
     private int approverId;  // 经理Id
     private String applytype;  // 申请类型：open；modify
+    private String applytime;
 
-    public HostelApply(int id, String applyer, String phone, String email, String identity, String hostelname, String location, String description, String imgurl, String approvalstate, int approverId, String applytype) {
-        this.id = id;
+
+    public HostelApply() {};
+
+    public HostelApply(String applyer, String phone, String email, String identity, String hostelname, String location, String description, String imgurl, String approvalstate, int approverId, String applytype, String applytime) {
         this.applyer = applyer;
         this.phone = phone;
         this.email = email;
@@ -39,6 +42,7 @@ public class HostelApply implements Serializable {
         this.approvalstate = approvalstate;
         this.approverId = approverId;
         this.applytype = applytype;
+        this.applytime = applytime;
     }
 
     @Id
@@ -136,5 +140,13 @@ public class HostelApply implements Serializable {
 
     public void setApplytype(String applytype) {
         this.applytype = applytype;
+    }
+
+    public String getApplytime() {
+        return applytime;
+    }
+
+    public void setApplytime(String applytime) {
+        this.applytime = applytime;
     }
 }

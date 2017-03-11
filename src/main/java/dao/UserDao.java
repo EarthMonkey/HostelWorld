@@ -1,6 +1,6 @@
 package dao;
 
-import model.RespInfo;
+import common.RespInfo;
 import model.User;
 
 /**

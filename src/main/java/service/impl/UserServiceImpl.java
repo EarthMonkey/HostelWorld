@@ -1,7 +1,7 @@
 package service.impl;
 
 import dao.UserDao;
-import model.RespInfo;
+import common.RespInfo;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

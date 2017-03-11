@@ -1,7 +1,6 @@
 package service;
 
-import model.RespInfo;
-import model.User;
+import common.RespInfo;
 
 /**
  * Created by L.H.S on 2017/3/10.

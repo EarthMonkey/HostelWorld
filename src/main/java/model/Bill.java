@@ -12,6 +12,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "bill")
 public class Bill implements Serializable {
+    public Bill() {
+    }
 
     @Id
     private int id;
@@ -19,6 +21,8 @@ public class Bill implements Serializable {
     private String time;
     private double pay;
     private String hostel;
+    private String year;
+    private String month;
 
     public int getUserId() {
         return userId;
@@ -52,11 +56,30 @@ public class Bill implements Serializable {
         this.hostel = hostel;
     }
 
-    public Bill(int userId, String time, double pay, String hostel) {
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public Bill(int userId, String time, double pay, String hostel, String year, String month) {
 
         this.userId = userId;
         this.time = time;
         this.pay = pay;
         this.hostel = hostel;
+        this.year = year;
+        this.month = month;
     }
 }

@@ -24,6 +24,8 @@ public class CheckIn implements Serializable {
     private String paytype;
     private int userId;
 
+    public CheckIn() {}
+
     public CheckIn(int roomId, String checktime, String leavetime, String checkinstaff, double pay, String ismember, String paytype, int userId) {
         this.roomId = roomId;
         this.checktime = checktime;
