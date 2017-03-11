@@ -37,23 +37,23 @@
     <div class="hostel_img"><img src="../../image/HongKong.png"></div>
     <div class="info_right">
         <div>
-            <span style="font-size: 24px;display: inline-block;vertical-align: bottom;">xxxxxxxxx旅社</span>
+            <span style="font-size: 24px;display: inline-block;vertical-align: bottom;"></span>
             <div class="mod_btn" onclick="modInfo()">修改</div>
         </div>
 
         <div>
             <div class="inner_each_part">
-                <div><i class="fa fa-map-marker"></i> &nbsp;<span>江苏省南京市南京大学鼓楼校区汉口路22号</span></div>
+                <div><i class="fa fa-map-marker"></i> &nbsp;<span></span></div>
                 <div style="margin-top: 15px;">
                     客栈描述：
-                    <span style="font-size: 14px;">这是一个加盟了HostelWorld的旅社，这是一个地址在江苏省南京市鼓楼区的旅社，这是一段很长的对客栈的描述。</span>
+                    <span style="font-size: 14px;"></span>
                 </div>
             </div>
 
             <div class="inner_each_part">
-                <div>店主姓名：<span>XXXX</span></div>
-                <div style="margin-top: 15px;">联系电话：<span>12345678910</span></div>
-                <div style="margin-top: 15px;">联系邮箱：<span>xxxxxxxxxx@hotmail.com</span></div>
+                <div>店主姓名：<span></span></div>
+                <div style="margin-top: 15px;">联系电话：<span></span></div>
+                <div style="margin-top: 15px;">联系邮箱：<span></span></div>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
     <div class="notice_div">
         <div style="display: inline-block; vertical-align: top;"><img src="../../image/notice.svg">本店公告：</div>
         <div style="display: inline-block; vertical-align: top;">
-            <span>2017年3月2日，本旅店入住一律打八折，这是一条很长很长很长很长很长很长很长很长很长很长的公告</span>
+            <span></span>
         </div>
     </div>
 

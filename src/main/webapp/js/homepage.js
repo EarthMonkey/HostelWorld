@@ -439,7 +439,6 @@ function checkCode(index) {
                 pwd: pwd.value
             },
             success: function () {
-                alert(1);
                 toLogin("#regStep2");
             },
             error: function () {

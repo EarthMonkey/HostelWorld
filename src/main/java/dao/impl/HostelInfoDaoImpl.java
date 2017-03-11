@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public class HostelInfoDaoImpl implements HostelInfoDao{
+public class HostelInfoDaoImpl implements HostelInfoDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -23,8 +23,14 @@ public class HostelInfoDaoImpl implements HostelInfoDao{
 
         if (hosInfo != null) {
             return new RespInfo(true, hosInfo.getPassword(), "");
-        }  else {
+        } else {
             return new RespInfo(false, "无效的客栈编号", "");
         }
+    }
+
+    public HostelInfo getInfo(int hosId) {
+
+        HostelInfo hosInfo = (HostelInfo) sessionFactory.getCurrentSession().get(HostelInfo.class, hosId);
+        return hosInfo;
     }
 }

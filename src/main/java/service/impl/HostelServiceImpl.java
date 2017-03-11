@@ -2,6 +2,7 @@ package service.impl;
 
 import common.RespInfo;
 import dao.HostelInfoDao;
+import model.HostelInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.HostelService;
@@ -14,7 +15,7 @@ import javax.transaction.Transactional;
 
 @Service("hostelService")
 @Transactional
-public class HostelServiceImpl implements HostelService{
+public class HostelServiceImpl implements HostelService {
 
     @Autowired
     private HostelInfoDao hostelInfoDao;
@@ -30,7 +31,11 @@ public class HostelServiceImpl implements HostelService{
                 return new RespInfo(false, "密码错误", "");
             }
         } else {
-            return new RespInfo(false,"无效的客栈编号", "");
+            return new RespInfo(false, "无效的客栈编号", "");
         }
+    }
+
+    public HostelInfo getInfo(int hosId) {
+        return hostelInfoDao.getInfo(hosId);
     }
 }
