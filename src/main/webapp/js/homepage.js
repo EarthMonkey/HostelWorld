@@ -93,6 +93,28 @@ function login(id) {
     } else if (index == 1) {
         // 客栈登录
 
+        $.ajax({
+            type: "POST",
+            url: "/hostel/Login",
+            data: {
+                hosId: userId,
+                pwd: pwd
+            },
+            success: function (resp) {
+                if (resp.status == true) {
+                    location.href = "hostel/HostelBusiness.jsp";
+                } else {
+                    err_lbl.innerHTML = resp.info;
+                    inputDiv[0].parentNode.appendChild(err_lbl);
+                    $(inputDiv[0]).focus(function () {
+                        $(err_lbl).remove();
+                    });
+                }
+            },
+            error: function () {
+                alert("登录失败");
+            }
+        });
 
     } else {
 

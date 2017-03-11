@@ -70,13 +70,17 @@ public class HostelApplyServiceImpl implements HostelApplyService {
 
     public RespInfo checkCode(String checkCode) {
         List<HostelRegister> registers = registerDao.checkCode(checkCode);
-        HostelRegister reg = registers.get(0);
 
-        if (registers.size() == 0 || reg.getState() == "reg") {
+
+        if (registers.size() == 0) {
             return new RespInfo(false, "无效的验证码", "");
         } else {
-
-            return new RespInfo(true, "", reg);
+            HostelRegister reg = registers.get(0);
+            if (reg.getState() == "reg") {
+                return new RespInfo(false, "无效的验证码", "");
+            } else {
+                return new RespInfo(true, "", reg);
+            }
         }
     }
 

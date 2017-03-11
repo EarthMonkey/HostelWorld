@@ -1,5 +1,8 @@
 package dao.impl;
 
+import common.RespInfo;
+import dao.HostelInfoDao;
+import model.HostelInfo;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,10 +12,19 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public class HostelInfoDaoImpl {
+public class HostelInfoDaoImpl implements HostelInfoDao{
 
     @Autowired
     private SessionFactory sessionFactory;
 
+    public RespInfo getPwd(int hosId) {
 
+        HostelInfo hosInfo = (HostelInfo) sessionFactory.getCurrentSession().get(HostelInfo.class, hosId);
+
+        if (hosInfo != null) {
+            return new RespInfo(true, hosInfo.getPassword(), "");
+        }  else {
+            return new RespInfo(false, "无效的客栈编号", "");
+        }
+    }
 }
