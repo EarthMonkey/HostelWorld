@@ -296,8 +296,32 @@ function toLogin(id) {
 // 申请开店
 function hostelApply() {
 
+    var inputs = $("#hostelApply").find("input");
+    var areas = $("#hostelApply").find("textarea");
 
-    toLogin("#hostelApply");
+    var location = $(areas[0]).val();
+    var description = $(areas[1]).val();
+
+    $.ajax({
+        type: "POST",
+        url: "/hostel/apply",
+        data: {
+            applyer: inputs[0].value,
+            email: inputs[1].value,
+            phone: inputs[2].value,
+            identity: inputs[3].value,
+            hostelname: inputs[4].value,
+            location: location,
+            description: description,
+            imgurl: ""
+        },
+        success: function () {
+            toLogin("#hostelApply");
+        },
+        error: function () {
+            alert("申请失败");
+        }
+    });
 }
 
 var hostelId;
