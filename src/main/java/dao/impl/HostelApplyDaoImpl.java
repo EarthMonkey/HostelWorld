@@ -24,7 +24,7 @@ public class HostelApplyDaoImpl implements HostelApplyDao{
         sessionFactory.getCurrentSession().save(apply);
     }
 
-    public void updateState(int applyId, String state, int approverId) {
+    public HostelApply updateState(int applyId, String state, int approverId) {
 
         Session session = sessionFactory.getCurrentSession();
         HostelApply apply = (HostelApply) session.load(HostelApply.class, applyId);
@@ -32,6 +32,7 @@ public class HostelApplyDaoImpl implements HostelApplyDao{
         apply.setApproverId(approverId);
 
         session.update(apply);
+        return apply;
     }
 
     public List<HostelApply> getApply() {

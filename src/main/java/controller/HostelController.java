@@ -61,4 +61,13 @@ public class HostelController {
         int hosId = (Integer) session.getAttribute("hosId");
         return hostelService.getInfo(hosId);
     }
+
+    @RequestMapping("/modApply")
+    public void modApply(HttpSession session, @RequestParam String applyer, @RequestParam String phone,
+                         @RequestParam String email, @RequestParam String hostelname, @RequestParam String notice,
+                         @RequestParam String location, @RequestParam String description, @RequestParam String imgurl) {
+
+        int hosId = (Integer) session.getAttribute("hosId");
+        applyService.modApply(hosId, applyer, phone, email, hostelname, location, description, notice, imgurl);
+    }
 }

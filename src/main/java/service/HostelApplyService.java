@@ -26,4 +26,9 @@ public interface HostelApplyService {
 
     // 设置密码
     void setPwd(int regId, int applyId, String pwd);
+
+    // 客栈修改信息  identity 即 客栈Id
+    void modApply(int hosId, String applyer, String phone,
+                  String email, String hostelname, String location,
+                  String description, String notice, String imgurl);
 }

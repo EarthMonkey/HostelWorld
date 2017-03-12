@@ -119,8 +119,13 @@
 
         <div class="block_div" style="margin-top: 20px;">
 
-            <div class="describe_div">
-                <textarea class="text_area" style="width: 370px;height: 100px;"
+            <div class="describe_div" style="width: 370px;">
+                <textarea class="text_area" style="width: 100%;height: 100px;"
+                          placeholder="" readonly></textarea>
+            </div>
+
+            <div class="describe_div" style="width: 255px; display: none;">
+                <textarea class="text_area" style="width: 255px;height: 100px;"
                           placeholder="" readonly></textarea>
             </div>
 

@@ -2,6 +2,7 @@ package service.impl;
 
 import common.RespInfo;
 import dao.HostelApplyDao;
+import dao.HostelInfoDao;
 import dao.HostelRegisterDao;
 import model.HostelApply;
 import model.HostelInfo;
@@ -26,6 +27,8 @@ public class HostelApplyServiceImpl implements HostelApplyService {
     private HostelApplyDao applyDao;
     @Autowired
     private HostelRegisterDao registerDao;
+    @Autowired
+    private HostelInfoDao infoDao;
 
     public void apply(String applyer, String phone,
                       String email, String identity, String hostelname,
@@ -48,12 +51,22 @@ public class HostelApplyServiceImpl implements HostelApplyService {
     }
 
     public void updateState(int applyId, String state, int approverId) {
-        applyDao.updateState(applyId, state, approverId);
+
+        HostelApply ha = applyDao.updateState(applyId, state, approverId);
+
+        if (ha.getApplytype().equals("modify")) {
+
+            // 更新数据库，发送邮件
+            // 其中identity为hosId
+            infoDao.updateInfo(ha);
+
+            return;
+        }
 
         // 若同意，生成验证码， 并发送邮件
-        char code1 = (char) ('A' + (int) Math.random() * 26);
-        char code2 = (char) ('A' + (int) Math.random() * 26);
-        char code3 = (char) ('A' + (int) Math.random() * 26);
+        char code1 = (char) ('A' + (int) (Math.random() * 26));
+        char code2 = (char) ('A' + (int) (Math.random() * 26));
+        char code3 = (char) ('A' + (int) (Math.random() * 26));
         int codeId = applyId % 1000;
         String checkCode = String.valueOf(code1) + codeId + "" + String.valueOf(code2);
         if (codeId < 10) {
@@ -93,5 +106,17 @@ public class HostelApplyServiceImpl implements HostelApplyService {
                 ha.getDescription(), ha.getApplyer(), ha.getPhone(), ha.getEmail(), "", 100);
 
         registerDao.insertInfo(hi);
+    }
+
+    public void modApply(int hosId, String applyer, String phone, String email, String hostelname,
+                         String location, String description, String notice, String imgurl) {
+
+        Date today = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        HostelApply ha = new HostelApply(applyer, phone, email, hosId + "", hostelname, location,
+                description, imgurl, "unchecked", "modify", df.format(today));
+        ha.setNotice(notice);
+
+        applyDao.insert(ha);
     }
 }

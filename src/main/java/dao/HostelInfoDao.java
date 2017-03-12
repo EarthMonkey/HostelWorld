@@ -1,6 +1,7 @@
 package dao;
 
 import common.RespInfo;
+import model.HostelApply;
 import model.HostelInfo;
 
 /**
@@ -11,4 +12,6 @@ public interface HostelInfoDao {
     RespInfo getPwd(int hosId);
 
     HostelInfo getInfo(int hosId);
+
+    void updateInfo(HostelApply ha);
 }

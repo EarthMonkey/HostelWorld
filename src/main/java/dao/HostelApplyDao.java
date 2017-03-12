@@ -11,7 +11,7 @@ public interface HostelApplyDao {
 
      void insert(HostelApply apply);
 
-     void updateState(int applyId, String state, int approverId);
+     HostelApply updateState(int applyId, String state, int approverId);
 
      List<HostelApply> getApply();
 

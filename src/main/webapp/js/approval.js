@@ -36,6 +36,11 @@ function getApprove() {
             for (var i = 0; i < resp.length; i++) {
                 var div = $("<div class='approve_div'></div>");
                 div.html(approve_copy.html());
+
+                if(resp[i].applytype == "modify") {
+                    $(div.find("span")[0]).html("修改信息申请");
+                }
+
                 $(div.find("span")[1]).html(resp[i].applytime);
                 $(div.find("a")[0]).html(i);
 
@@ -63,6 +68,10 @@ function getApprove() {
                 div.html(approve_copy.html());
                 $(div.find("span")[1]).html(resp[i].applytime);
                 $(div.find("a")[0]).html(i);
+
+                if(resp[i].applytype == "modify") {
+                    $(div.find("span")[0]).html("修改信息申请");
+                }
 
                 var img = $("<img class='syb_img' src='../../image/agree.png'>");
                 if (resp[i].approvalstate == "inapprove") {
@@ -108,6 +117,19 @@ function showDetail(node, syb) {
 
     areas[0].value = "店址：" + data.location;
     areas[1].value = "描述：" + data.description;
+
+    var uploadDiv = $(".upload_div");
+    var describeDiv = $(".describe_div");
+    if (data.applytype == "modify") {
+        $(describeDiv[0]).css("width", "255px");
+        $(describeDiv[1]).show();
+        areas[2].value = "公告：" + data.notice;
+        uploadDiv.hide();
+    } else {
+        $(describeDiv[0]).css("width", "370px");
+        $(describeDiv[1]).hide();
+        uploadDiv.show();
+    }
 
     $("#hostelApply").find("a").html(data.id);
 }

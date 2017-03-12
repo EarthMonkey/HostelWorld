@@ -89,13 +89,37 @@ function modInfo() {
 // 申请修改
 function modApply() {
 
+    var modInputs = $("#infoMod").find("input");
+    var modArea = $("#infoMod").find("textarea");
 
-    $("#infoMod").find(".remind_div").show();
-    var span = $("#infoMod").find(".remind_div").find("span")[0];
-    self.setInterval(function () {
-        var current = parseInt(span.innerHTML);
-        span.innerHTML = current - 1;
-    }, 1000);
+    $.ajax({
+        type: "POST",
+        url: "/hostel/modApply",
+        data: {
+            applyer: modInputs[0].value,
+            email: modInputs[1].value,
+            phone: modInputs[2].value,
+            hostelname: modInputs[3].value,
+            location: modArea[0].value,
+            description:  modArea[1].value,
+            notice: modArea[2].value,
+            imgurl: "",
+        },
+        success: function () {
 
-    setTimeout("window.location.reload();", 3000);
+            $("#infoMod").find(".remind_div").show();
+            var span = $("#infoMod").find(".remind_div").find("span")[0];
+            self.setInterval(function () {
+                var current = parseInt(span.innerHTML);
+                span.innerHTML = current - 1;
+            }, 1000);
+
+            setTimeout("window.location.reload();", 3000);
+
+        },
+        error: function () {
+            alert("修改失败");
+        }
+    });
+
 }

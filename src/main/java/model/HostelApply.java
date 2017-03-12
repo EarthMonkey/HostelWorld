@@ -27,6 +27,8 @@ public class HostelApply implements Serializable {
     private String applytype;  // 申请类型：open；modify
     private String applytime;
 
+    private String notice;  //公告
+
 
     public HostelApply() {};
 
@@ -147,5 +149,13 @@ public class HostelApply implements Serializable {
 
     public void setApplytime(String applytime) {
         this.applytime = applytime;
+    }
+
+    public String getNotice() {
+        return notice;
+    }
+
+    public void setNotice(String notice) {
+        this.notice = notice;
     }
 }
