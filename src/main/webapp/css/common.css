@@ -64,3 +64,8 @@ body {
     margin-top: 90px;
     background-color: #f17350;
 }
+
+.portrait_img {
+    width: 100%;
+    border-radius: 50%;
+}

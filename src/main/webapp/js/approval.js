@@ -64,7 +64,7 @@ function getApprove() {
             HAS_APPROVE = resp;
 
             for (var i = 0; i < resp.length; i++) {
-                var div = $("<div class='approve_div'></div>");
+                var div = $("<div class='approve_div' style='width: 150px;'></div>");
                 div.html(approve_copy.html());
                 $(div.find("span")[1]).html(resp[i].applytime);
                 $(div.find("a")[0]).html(i);

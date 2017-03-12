@@ -32,6 +32,7 @@
 <div class="above_part">
     <div style="margin-top: 35px; margin-left: 65px;">
         <div class="portrait_div">
+            <img class="portrait_img" src="../../image/portrait_img.svg">
             <div class="lvl_img_div">
                 <img style="width: 100%" src="../../image/mem_lv_1.png">
             </div>
@@ -143,7 +144,7 @@
         <%-- 头像部分 --%>
         <div class="head_info">
             <div class="photo_change">
-
+                <img class="portrait_img" src="../../image/portrait_img.svg">
                 <div class="fa fa-camera camera_btn"></div>
             </div>
 

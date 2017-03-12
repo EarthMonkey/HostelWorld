@@ -1,6 +1,7 @@
 package service.impl;
 
 import common.RespInfo;
+import common.SendEmail;
 import dao.HostelApplyDao;
 import dao.HostelInfoDao;
 import dao.HostelRegisterDao;
@@ -54,12 +55,21 @@ public class HostelApplyServiceImpl implements HostelApplyService {
 
         HostelApply ha = applyDao.updateState(applyId, state, approverId);
 
+        String info = "对不起，您的申请未经过审批。<br>详情请咨询电话：1525099xxxx";
+        RespInfo respInfo = new RespInfo(true, info, ha.getEmail());
+
+        if (state.equals("inapprove")) {
+            // 发送邮件
+            sendEmail(respInfo);
+            return;
+        }
+
         if (ha.getApplytype().equals("modify")) {
 
             // 更新数据库，发送邮件
             // 其中identity为hosId
             infoDao.updateInfo(ha);
-
+            sendEmail(respInfo);
             return;
         }
 
@@ -79,6 +89,11 @@ public class HostelApplyServiceImpl implements HostelApplyService {
 
         HostelRegister register = new HostelRegister(checkCode, applyId, "notReg");
         registerDao.insert(register);
+
+        String sucInfo = "恭喜您！<br>您的开店申请已通过审批！<br>您的注册码是：<span style='color:red; font-size: 20px;'>"
+                + checkCode + "</span><br>请到<a href='http://localhost:8082/html/HomePage.jsp'>HostelWorld</a>进行注册！";
+        respInfo.setInfo(sucInfo);
+        sendEmail(respInfo);
     }
 
     public RespInfo checkCode(String checkCode) {
@@ -118,5 +133,10 @@ public class HostelApplyServiceImpl implements HostelApplyService {
         ha.setNotice(notice);
 
         applyDao.insert(ha);
+    }
+
+    private void sendEmail(RespInfo respInfo) {
+        SendEmail sendEmail = new SendEmail(respInfo);
+        sendEmail.start();
     }
 }

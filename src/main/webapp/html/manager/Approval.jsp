@@ -33,7 +33,9 @@
 
 <div class="above_part">
     <div style="margin-top: 35px; margin-left: 65px;">
-        <div class="portrait_div"></div>
+        <div class="portrait_div">
+            <img class="portrait_img" src="../../image/portrait_img.svg">
+        </div>
 
         <div class="info_div">
             <span style="font-size: 24px; color: #2b2b2b;"><%=session.getAttribute("managerName") %></span><br>
