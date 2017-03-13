@@ -28,7 +28,7 @@ public class User implements Serializable {
     private String level = "大众会员";
     private double balance;
     private int point;
-    private String entertime;
+    private String jointime;
 
     public User() {
 
@@ -132,7 +132,7 @@ public class User implements Serializable {
         this.point = point;
     }
 
-    public String getEntertime() { return entertime; }
+    public String getJointime() { return jointime; }
 
-    public void setEntertime(String entertime) { this.entertime = entertime; }
+    public void setJointime(String entertime) { this.jointime = entertime; }
 }

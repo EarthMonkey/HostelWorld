@@ -17,4 +17,8 @@ public interface MyOrderDao {
 
     // checkstate=checked
     List<MyOrder> getMyCheckin(int userId);
+
+    MyOrder getTheOrder(int orderId);
+
+    void updateOrder(int orderId, int roomId);
 }

@@ -3,6 +3,7 @@ package controller;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import common.RespInfo;
 import model.HostelInfo;
+import org.jboss.logging.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,5 +100,12 @@ public class HostelController {
 
         int hosId = (Integer) session.getAttribute("hosId");
         hostelService.checkOut(hosId, roomId, checkouttime, payinfo, totalpay);
+    }
+
+    @RequestMapping("/getTheOrder")
+    public RespInfo getTheOrder(HttpSession session, @RequestParam int orderId) {
+
+        int hosId = (Integer) session.getAttribute("hosId");
+        return hostelService.getTheOrder(orderId, hosId);
     }
 }

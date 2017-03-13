@@ -46,4 +46,21 @@ public class MyOrderDaoImpl implements MyOrderDao {
 
         return list;
     }
+
+    public MyOrder getTheOrder(int orderId) {
+
+        MyOrder order = (MyOrder) sessionFactory.getCurrentSession().get(MyOrder.class, orderId);
+        return order;
+    }
+
+    public void updateOrder(int orderId, int roomId) {
+
+        Session session = sessionFactory.getCurrentSession();
+        MyOrder order = (MyOrder) session.load(MyOrder.class, orderId);
+        order.setCheckstate("checked");
+        order.setOrderstate("history");
+        order.setRoom(roomId + "");
+
+        session.update(order);
+    }
 }

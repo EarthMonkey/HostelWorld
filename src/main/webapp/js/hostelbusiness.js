@@ -7,7 +7,8 @@ window.onload = function () {
     changeCheck(0);
 };
 
-var CHECKOUT_SYB = 0;
+var CHECKOUT_SYB = 0;  // 登出前是否已查询：0，未查询；1，已查询
+var ORDER_SYB = 0;  // 入住登记是否通过订单：0，否；1，是
 
 function getHostelInfo() {
 
@@ -40,6 +41,8 @@ function addCheck() {
     div.html($(copy).html());
 
     $("#checks").append(div);
+
+    return div;
 }
 
 function checkMember(checkbox) {
@@ -66,7 +69,7 @@ function changeCheck(index) {
     }
 
     var date = new Date();
-    var now = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    var now = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
 
     $("#checkInTime").val(now);
     $("#checkOutTime_out").val(now);
@@ -138,7 +141,7 @@ function checkIn() {
 
     var inputs = $("#checkIn").find("input");
     var orderId = inputs[0].value;
-    if (orderId == "") {
+    if (ORDER_SYB == 0 || orderId == "") {
         orderId = -1;
     }
     var roomId = inputs[1].value;
@@ -229,7 +232,7 @@ function getCheckIn() {
                     var span1 = $("<span></span>");
                     span1.html(eachOne[0]);
                     $("#checkOnes").append(span1);
-                    var span2 = $("<span style='margin-left: 10px;'></span>")
+                    var span2 = $("<span style='margin-left: 10px;'></span>");
                     span2.html(eachOne[1] + "<br>");
                     $("#checkOnes").append(span2);
                 }
@@ -272,7 +275,7 @@ function checkOut() {
     $.ajax({
         type: "POST",
         url: "/hostel/CheckOut",
-        data:{
+        data: {
             roomId: inputs[0].value,
             checkouttime: $("#checkOutTime_out").val(),
             totalpay: totalpay,
@@ -285,5 +288,38 @@ function checkOut() {
             alert("登记失败");
         }
     });
+}
 
+function getTheOrder() {
+
+    var orderId = $("#checkIn").find("input")[0].value;
+    $.ajax({
+        type: "POST",
+        url: "/hostel/getTheOrder",
+        data: {
+            orderId: orderId
+        },
+        success: function (resp) {
+            if (resp.status == true) {
+                ORDER_SYB = 1;
+                var orderInfo = resp.object;
+
+                $("#checkOutTime").val(orderInfo.leavetime);
+
+                var checkbox = $("#isMember");
+                checkbox.attr("checked", true);
+                checkbox.trigger("change");
+
+                $("#payPart").find("input")[0].value = orderInfo.pay;
+                $("#member_input").find("input")[0].value = orderInfo.userId;
+
+            } else {
+                ORDER_SYB = 0;
+                alert(resp.info);
+            }
+        },
+        error: function () {
+            alert("获取订单失败");
+        }
+    });
 }

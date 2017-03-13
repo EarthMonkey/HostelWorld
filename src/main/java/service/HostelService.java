@@ -20,4 +20,7 @@ public interface HostelService {
 
     // 更新checkin状态，和room状态
     void checkOut(int hosId, int roomId, String checkouttime, String payinfo, double totalpay);
+
+    // 根据订单查询
+    RespInfo getTheOrder(int orderId, int hosId);
 }

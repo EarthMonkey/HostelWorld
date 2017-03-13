@@ -82,7 +82,7 @@
                 <input class="mod_field mod_state" type="text" placeholder="订单号">
             </div>
 
-            <div class="check_btn inline_style" style="width: 70px;">查询</div>
+            <div class="check_btn inline_style" style="width: 70px;" onclick="getTheOrder()">查询</div>
         </div>
 
         <div class="each_info">

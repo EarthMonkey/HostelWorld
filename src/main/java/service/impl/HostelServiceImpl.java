@@ -1,14 +1,8 @@
 package service.impl;
 
 import common.RespInfo;
-import dao.CheckinDao;
-import dao.CheckoutDao;
-import dao.HostelInfoDao;
-import dao.HostelRoomDao;
-import model.CheckIn;
-import model.CheckOut;
-import model.HostelInfo;
-import model.HostelRoom;
+import dao.*;
+import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.HostelService;
@@ -31,6 +25,8 @@ public class HostelServiceImpl implements HostelService {
     private CheckinDao checkinDao;
     @Autowired
     private CheckoutDao checkoutDao;
+    @Autowired
+    private MyOrderDao orderDao;
 
     public RespInfo hostelLogin(int hostelId, String pwd) {
 
@@ -57,6 +53,7 @@ public class HostelServiceImpl implements HostelService {
 
         if (orderId != -1) {
             // 更新order状态
+            orderDao.updateOrder(orderId, roomId);
         }
 
         HostelRoom room = roomDao.getRoom(hosId, roomId);
@@ -98,5 +95,19 @@ public class HostelServiceImpl implements HostelService {
 
         checkinDao.updateState(hosId, roomId);
         roomDao.updateState(hosId, roomId, "empty");
+    }
+
+    public RespInfo getTheOrder(int orderId, int hosId) {
+
+        MyOrder order = orderDao.getTheOrder(orderId);
+        if (order != null) {
+            if (order.getHostelId() == hosId) {
+                return new RespInfo(true, "", order);
+            } else {
+                return new RespInfo(false, "非本店订单", "");
+            }
+        } else {
+            return new RespInfo(false, "订单号不存在", "");
+        }
     }
 }
