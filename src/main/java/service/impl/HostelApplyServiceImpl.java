@@ -55,7 +55,8 @@ public class HostelApplyServiceImpl implements HostelApplyService {
 
         HostelApply ha = applyDao.updateState(applyId, state, approverId);
 
-        String info = "对不起，您的申请未经过审批。<br>详情请咨询电话：1525099xxxx";
+        String info = "对不起，<br>您的申请未经过审批。<br>详情请咨询电话：1525099xxxx<br>" +
+                "@<a href='http://localhost:8082/html/HomePage.jsp'>HostelWorld</a>";
         RespInfo respInfo = new RespInfo(true, info, ha.getEmail());
 
         if (state.equals("inapprove")) {

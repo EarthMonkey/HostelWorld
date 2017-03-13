@@ -72,7 +72,7 @@ public class SendEmail extends Thread {
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(from));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(respInfo.getObject().toString()));  // 邮箱地址
-        message.setSubject("HostelWorld客栈注册码");  // 主题
+        message.setSubject("HostelWorld");  // 主题
 
         String info = respInfo.getInfo();
         message.setContent(info, "text/html;charset=UTF-8");

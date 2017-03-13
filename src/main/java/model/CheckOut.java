@@ -14,25 +14,26 @@ public class CheckOut implements Serializable {
 
     @Id
     private int id;
+    private int hostelId;
     private int roomId;
     private String checkintime;
     private String checkouttime;
     private String checkinstaff;  // 联系人1-手机号；联系人2-手机号
     private double totalpay;
-    private String ismember;
-    private String paytype;
+    private String payinfo;
     private int userId;
 
-    public CheckOut() {}
+    public CheckOut() {
+    }
 
-    public CheckOut(int roomId, String checkintime, String checkouttime, String checkinstaff, double totalpay, String ismember, String paytype, int userId) {
+    public CheckOut(int hostelId, int roomId, String checkintime, String checkouttime, String checkinstaff, double totalpay, String payinfo, int userId) {
+        this.hostelId = hostelId;
         this.roomId = roomId;
         this.checkintime = checkintime;
         this.checkouttime = checkouttime;
         this.checkinstaff = checkinstaff;
         this.totalpay = totalpay;
-        this.ismember = ismember;
-        this.paytype = paytype;
+        this.payinfo = payinfo;
         this.userId = userId;
     }
 
@@ -76,20 +77,12 @@ public class CheckOut implements Serializable {
         this.totalpay = totalpay;
     }
 
-    public String getIsmember() {
-        return ismember;
+    public String getPayinfo() {
+        return payinfo;
     }
 
-    public void setIsmember(String ismember) {
-        this.ismember = ismember;
-    }
-
-    public String getPaytype() {
-        return paytype;
-    }
-
-    public void setPaytype(String paytype) {
-        this.paytype = paytype;
+    public void setPayinfo(String paytype) {
+        this.payinfo = paytype;
     }
 
     public int getUserId() {
@@ -98,5 +91,13 @@ public class CheckOut implements Serializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getHostelId() {
+        return hostelId;
+    }
+
+    public void setHostelId(int hostelId) {
+        this.hostelId = hostelId;
     }
 }

@@ -19,6 +19,8 @@ public class HostelRoom implements Serializable {
     private int hostelId;
     private String isempty;
 
+    public HostelRoom() {}
+
     public HostelRoom(int roomId, int hostelId, String isempty) {
         this.roomId = roomId;
         this.hostelId = hostelId;

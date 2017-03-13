@@ -130,3 +130,8 @@
     color: #2b2b2b;
     line-height: 30px;
 }
+
+#member_input {
+    margin-top: -25px;
+    display: none;
+}

@@ -1,8 +1,14 @@
 package service.impl;
 
 import common.RespInfo;
+import dao.CheckinDao;
+import dao.CheckoutDao;
 import dao.HostelInfoDao;
+import dao.HostelRoomDao;
+import model.CheckIn;
+import model.CheckOut;
 import model.HostelInfo;
+import model.HostelRoom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.HostelService;
@@ -19,6 +25,12 @@ public class HostelServiceImpl implements HostelService {
 
     @Autowired
     private HostelInfoDao hostelInfoDao;
+    @Autowired
+    private HostelRoomDao roomDao;
+    @Autowired
+    private CheckinDao checkinDao;
+    @Autowired
+    private CheckoutDao checkoutDao;
 
     public RespInfo hostelLogin(int hostelId, String pwd) {
 
@@ -37,5 +49,54 @@ public class HostelServiceImpl implements HostelService {
 
     public HostelInfo getInfo(int hosId) {
         return hostelInfoDao.getInfo(hosId);
+    }
+
+    // 存储到checkin，更新room的empty
+    public RespInfo checkIn(int hosId, int roomId, String checktime, String leavetime, String checkinstaff, double pay,
+                            String ismember, String paytype, int memberId, int orderId) {
+
+        if (orderId != -1) {
+            // 更新order状态
+        }
+
+        HostelRoom room = roomDao.getRoom(hosId, roomId);
+        if (room != null) {
+
+            if (room.getIsempty().equals("empty")) {
+                CheckIn checkIn = new CheckIn(hosId, roomId, checktime, leavetime, checkinstaff, pay, ismember, paytype, memberId, orderId);
+                checkIn.setState("valid");
+                checkinDao.insert(checkIn);
+                roomDao.updateState(hosId, roomId, "notempty");
+                return new RespInfo(true, "登记成功", "");
+            } else {
+                return new RespInfo(false, "房间非空", "");
+            }
+
+        } else {
+            return new RespInfo(false, "房间号不存在", "");
+        }
+    }
+
+    public RespInfo getCheckIn(int hosId, int roomId) {
+
+        CheckIn checkIn = checkinDao.getCheck(hosId, roomId);
+        if (checkIn != null) {
+            return new RespInfo(true, "", checkIn);
+        } else {
+            return new RespInfo(false, "搜索不到入住信息", "");
+        }
+    }
+
+    // 更新checkin状态，和room状态
+    public void checkOut(int hosId, int roomId, String checkouttime, String payinfo, double totalpay) {
+
+        // 存储到checkout
+        CheckIn checkIn = (CheckIn) getCheckIn(hosId, roomId).getObject();
+        CheckOut checkout = new CheckOut(hosId, roomId, checkIn.getChecktime(), checkouttime,
+                checkIn.getCheckinstaff(), totalpay, payinfo, checkIn.getUserId());
+        checkoutDao.insert(checkout);
+
+        checkinDao.updateState(hosId, roomId);
+        roomDao.updateState(hosId, roomId, "empty");
     }
 }

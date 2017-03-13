@@ -75,6 +75,16 @@
 <div id="checkIn" class="checkIn_part">
 
     <div class="sub_div">
+
+        <div style="padding-top: 30px;">
+            <div style="color: #979797; padding-left: 15px; display: inline-block">
+                若您已预订，请输入订单号
+                <input class="mod_field mod_state" type="text" placeholder="订单号">
+            </div>
+
+            <div class="check_btn inline_style" style="width: 70px;">查询</div>
+        </div>
+
         <div class="each_info">
             <div>
                 <input class="mod_field mod_state" type="text" placeholder="房间号">
@@ -106,11 +116,11 @@
 
         </div>
 
-        <div class="each_info">
+        <div id="payPart" class="each_info">
             <div>
                 <input class="mod_field mod_state" type="text" placeholder="押金金额">
             </div>
-            <div style="margin-top: -15px;">
+            <div style="margin-top: -25px;">
                 会员支付：<input id="isMember" type="checkbox" style="margin-right: 5px;" onchange="checkMember(this)">
                 <label for="isMember">会员</label>
             </div>
@@ -121,7 +131,11 @@
                 <label for="card" style="display: none;">会员卡</label>
             </div>
 
-            <div class="check_btn">完成</div>
+            <div id="member_input">
+                <input class="mod_field mod_state" type="text" placeholder="会员卡号">
+            </div>
+
+            <div class="check_btn" onclick="checkIn()">完成</div>
         </div>
     </div>
 </div>
@@ -132,11 +146,11 @@
         <div class="each_info">
             <div>
                 <input style="width: 130px;" class="mod_field mod_state inline_style" type="text" placeholder="房间号">
-                <div class="check_btn inline_style" style="width: 70px;">查询</div>
+                <div class="check_btn inline_style" style="width: 70px;" onclick="getCheckIn()">查询</div>
             </div>
 
             <div style="margin-top: -35px;">
-                入住时间：<span>2017-03-05</span>
+                入住时间：<span></span>
             </div>
 
             <div style="margin-top: -15px;">
@@ -146,20 +160,19 @@
 
         <div class="each_info">
             <div>入住人员：</div>
-            <div class="check_ones">
-                <span>姓名</span><span style="margin-left: 10px;">联系方式</span><br>
-                <span>姓名</span><span style="margin-left: 10px;">联系方式</span>
+            <div id="checkOnes" class="check_ones">
+                <%--<span>姓名</span><span style="margin-left: 10px;">联系方式</span><br>--%>
             </div>
         </div>
 
-        <div class="each_info">
-            <div>已付押金：<span style="color: #2b2b2b">600</span>
-                &nbsp;<span style="color: #2b2b2b;font-size: 14px;">会员，会员卡支付</span>
+        <div id="payPart_out" class="each_info">
+            <div>已付押金：<span style="color: #2b2b2b"></span>
+                &nbsp;<span style="color: #2b2b2b;font-size: 14px;"></span>
             </div>
             <div style="margin-top: -15px;">
                 <input class="mod_field mod_state" placeholder="应付金额">
             </div>
-            <div class="check_btn">完成</div>
+            <div class="check_btn" onclick="checkOut()">完成</div>
         </div>
 
     </div>

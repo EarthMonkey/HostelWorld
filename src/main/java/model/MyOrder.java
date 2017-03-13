@@ -17,6 +17,7 @@ public class MyOrder implements Serializable {
 
     @Column(name = "userId")
     private int userId;
+    private int hostelId;
     private String hostelname;
     private String location;
     private String room;
@@ -29,9 +30,10 @@ public class MyOrder implements Serializable {
     private String orderstate;   // 历史预定：history；future
     private String checkstate;   // 是否已入住： checked；unchecked
 
-    public MyOrder() {};
+    public MyOrder() {
+    }
 
-    public MyOrder(int id, int userId, String hostelname, String location, String room, String ordertime, String checkintime, String leavetime, double pay, String phone, String username, String orderstate, String checkstate) {
+    public MyOrder(int id, int userId, int hostelId, String hostelname, String location, String room, String ordertime, String checkintime, String leavetime, double pay, String phone, String username, String orderstate, String checkstate) {
         this.id = id;
         this.userId = userId;
         this.hostelname = hostelname;
@@ -149,5 +151,13 @@ public class MyOrder implements Serializable {
 
     public void setCheckstate(String checkstate) {
         this.checkstate = checkstate;
+    }
+
+    public int getHostelId() {
+        return hostelId;
+    }
+
+    public void setHostelId(int hostelId) {
+        this.hostelId = hostelId;
     }
 }

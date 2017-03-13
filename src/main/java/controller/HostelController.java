@@ -49,6 +49,7 @@ public class HostelController {
     @RequestMapping("/Login")
     public RespInfo login(HttpSession session, @RequestParam int hosId, @RequestParam String pwd) {
         RespInfo respInfo = hostelService.hostelLogin(hosId, pwd);
+
         if (respInfo.getStatus()) {
             session.setAttribute("hosId", hosId);
         }
@@ -69,5 +70,34 @@ public class HostelController {
 
         int hosId = (Integer) session.getAttribute("hosId");
         applyService.modApply(hosId, applyer, phone, email, hostelname, location, description, notice, imgurl);
+    }
+
+    @RequestMapping("/CheckIn")
+    public RespInfo checkIn(HttpSession session, @RequestParam int roomId, @RequestParam String checktime,
+                            @RequestParam String leavetime, @RequestParam String checkinstaff, @RequestParam double pay,
+                            @RequestParam String ismember, @RequestParam String paytype,
+                            @RequestParam int memberId, @RequestParam int orderId) {
+
+        int hosId = (Integer) session.getAttribute("hosId");
+        RespInfo respInfo = hostelService.checkIn(hosId, roomId, checktime, leavetime,
+                checkinstaff, pay, ismember, paytype, memberId, orderId);
+
+        return respInfo;
+    }
+
+    @RequestMapping("/getCheckIn")
+    public RespInfo getCheck(HttpSession session, @RequestParam int roomId) {
+        int hosId = (Integer) session.getAttribute("hosId");
+        RespInfo respInfo = hostelService.getCheckIn(hosId, roomId);
+
+        return respInfo;
+    }
+
+    @RequestMapping("/CheckOut")
+    public void checkOut(HttpSession session, @RequestParam int roomId, @RequestParam String checkouttime,
+                         @RequestParam double totalpay, @RequestParam String payinfo) {
+
+        int hosId = (Integer) session.getAttribute("hosId");
+        hostelService.checkOut(hosId, roomId, checkouttime, payinfo, totalpay);
     }
 }

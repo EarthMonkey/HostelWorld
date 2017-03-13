@@ -15,6 +15,7 @@ public class CheckIn implements Serializable {
 
     @Id
     private int id;
+    private int hostelId;
     private int roomId;
     private String checktime;
     private String leavetime;
@@ -23,10 +24,14 @@ public class CheckIn implements Serializable {
     private String ismember;
     private String paytype;
     private int userId;
+    private String state;  // valid, invalid; checkout后设置对应房间号为invalid
+    private int orderId;
 
-    public CheckIn() {}
+    public CheckIn() {
+    }
 
-    public CheckIn(int roomId, String checktime, String leavetime, String checkinstaff, double pay, String ismember, String paytype, int userId) {
+    public CheckIn(int hosId, int roomId, String checktime, String leavetime, String checkinstaff, double pay, String ismember, String paytype, int userId, int orderId) {
+        this.hostelId = hosId;
         this.roomId = roomId;
         this.checktime = checktime;
         this.leavetime = leavetime;
@@ -35,6 +40,7 @@ public class CheckIn implements Serializable {
         this.ismember = ismember;
         this.paytype = paytype;
         this.userId = userId;
+        this.orderId = orderId;
     }
 
     public int getRoomId() {
@@ -99,5 +105,29 @@ public class CheckIn implements Serializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getHostelId() {
+        return hostelId;
+    }
+
+    public void setHostelId(int hostelId) {
+        this.hostelId = hostelId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }
