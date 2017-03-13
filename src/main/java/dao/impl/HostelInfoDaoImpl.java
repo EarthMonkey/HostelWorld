@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by L.H.S on 2017/3/9.
  */
@@ -48,5 +50,21 @@ public class HostelInfoDaoImpl implements HostelInfoDao {
         hosInfo.setName(ha.getHostelname());
         hosInfo.setDescription(ha.getDescription());
         hosInfo.setNotice(ha.getNotice());
+    }
+
+    public List<HostelInfo> getHostelByLocation(String location) {
+
+        String hql = "from HostelInfo hi where hi.location like '%" + location + "%'";
+        List<HostelInfo> list = sessionFactory.getCurrentSession().createQuery(hql).list();
+
+        return list;
+    }
+
+    public List<HostelInfo> getHostelByName(String name) {
+
+        String hql = "from HostelInfo hi where hi.name like '%" + name + "%'";
+        List<HostelInfo> list = sessionFactory.getCurrentSession().createQuery(hql).list();
+
+        return list;
     }
 }

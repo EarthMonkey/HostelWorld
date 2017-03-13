@@ -4,6 +4,8 @@ import common.RespInfo;
 import model.HostelApply;
 import model.HostelInfo;
 
+import java.util.List;
+
 /**
  * Created by L.H.S on 2017/3/9.
  */
@@ -14,4 +16,8 @@ public interface HostelInfoDao {
     HostelInfo getInfo(int hosId);
 
     void updateInfo(HostelApply ha);
+
+    List<HostelInfo> getHostelByLocation(String location);
+
+    List<HostelInfo> getHostelByName(String name);
 }

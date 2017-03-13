@@ -1,15 +1,19 @@
 package controller;
 
 import common.RespInfo;
+import model.HostelInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.HostelService;
+import service.OrderService;
 import service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by L.H.S on 2017/3/10.
@@ -22,6 +26,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private HostelService hostelService;
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping("/register")
     public int register(HttpSession session, @RequestParam String password, @RequestParam String username, @RequestParam String phone, String email, @RequestParam String birth, @RequestParam String sex, @RequestParam String bankcard) {
@@ -75,4 +83,22 @@ public class UserController {
         userService.updateBankcard(userId, bankcard);
     }
 
+    @RequestMapping("/Search")
+    public List<HostelInfo> search(HttpSession session, @RequestParam String key, @RequestParam String condition) {
+
+        return hostelService.searchHostel(key, condition);
+    }
+
+    @RequestMapping("/getHostelInfo")
+    public HostelInfo getInfo(HttpSession session, @RequestParam int hosId) {
+
+        return hostelService.getInfo(hosId);
+    }
+
+    @RequestMapping("/makeOrder")
+    public void makeOrder(HttpSession session, @RequestParam int hosId, @RequestParam String checktime, @RequestParam String leavetime, @RequestParam double pay) {
+
+        int userId = (Integer) session.getAttribute("userId");
+        orderService.insert(userId, hosId, checktime, leavetime, pay);
+    }
 }

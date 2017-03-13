@@ -13,10 +13,11 @@
     <link href="../../css/homepage.css" rel="stylesheet">
     <link href="../../css/css_reset.css" rel="stylesheet">
     <link href="../../css/common.css" rel="stylesheet">
+    <link href="../../css/datetimepicker.min.css" rel="stylesheet">
     <link href="../../css/userorder.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body>
+<body onclick="hideSearch(event)">
 
 <div class="nav_bar">
     <div class="logo_div">
@@ -30,10 +31,21 @@
 </div>
 
 <div class="search_div">
-    <input class="input_text search_input" type="text" placeholder="按地区搜索hostel">
-    <div class="btn search_btn">搜索</div>
+    <input class="input_text search_input" type="text" placeholder="按地区搜索hostel"
+           onkeydown="keyDown(event)">
+    <div class="btn search_btn" onclick="search()">搜索</div>
     <div class="key_btn key_selected" onclick="changeKey(0)">地区</div>
     <div class="key_btn" style="left: 58px;" onclick="changeKey(1)">店名</div>
+
+    <div id="searchResult" class="result_div">
+        <div id="noSearch">未搜索到相关客栈</div>
+    </div>
+
+    <div id="search_copy" class="each_search" style="display: none;">
+        <span>客栈xxxxxxxx</span>
+        <span class="location_div">南京市鼓楼区aaaa</span>
+        <a style="display: none;"></a>
+    </div>
 </div>
 
 <div class="introduce_div">
@@ -74,6 +86,8 @@
         </div>
         <div class="rule_div">
             <span>大众会员</span><br>
+        </div>
+        <div class="detail_div">
             · 0≤消费<1,000元<br>
             · 1元=1积分<br>
         </div>
@@ -84,6 +98,8 @@
         </div>
         <div class="rule_div">
             <span>黄金会员</span><br>
+        </div>
+        <div class="detail_div">
             · 1,000≤消费<5,000元<br>
             · 1元=1.1积分<br>
         </div>
@@ -94,6 +110,8 @@
         </div>
         <div class="rule_div">
             <span>铂金会员</span><br>
+        </div>
+        <div class="detail_div">
             · 5,000≤消费<20,000元<br>
             · 1元=1.2积分<br>
         </div>
@@ -104,6 +122,8 @@
         </div>
         <div class="rule_div">
             <span>钻石会员</span><br>
+        </div>
+        <div class="detail_div">
             · 20,000≤消费<100,000元<br>
             · 1元=1.3积分<br>
         </div>
@@ -114,9 +134,11 @@
         </div>
         <div class="rule_div">
             <span>黑卡贵宾</span><br>
+        </div>
+        <div class="detail_div">
             · 100,000元≤消费<br>
             · 1元=1.4积分<br>
-            · 允许先入住后付款
+            · 先入住后付款
         </div>
     </div>
     <div class="each_level" style="background-color: #e5e8e9;">
@@ -125,6 +147,8 @@
         </div>
         <div class="rule_div">
             <span style="font-size: 18px;">积分兑换</span><br>
+        </div>
+        <div class="detail_div">
             · 100积分=1元<br>
             · 只用于线上支付<br>
             · 不能够兑换现金
@@ -132,10 +156,66 @@
     </div>
 </div>
 
+<%-- 客栈信息 --%>
+<div id="hostelDetail" class="modal_bg" style="display: none;">
+    <div class="modal" style="position: relative;">
+
+        <div class="close_btn" onclick="$('#hostelDetail').hide()"><i class="fa fa-times"></i></div>
+
+        <div class="block_div" style="margin-top: 40px;">
+            <div class="hostel_img">
+                <img style="width: 100%" src="../../image/HongKong.png">
+            </div>
+
+            <div class="info_div">
+                <div><span>客栈名称</span></div>
+                <div class="location_info">地址：<span>江苏省南京市鼓楼区</span></div>
+                <div class="price_div">￥<span>200</span>元/天</div>
+            </div>
+        </div>
+
+        <div class="block_div" style="margin-top: 15px;">
+            <div class="left_part" style="margin-right: 24px;">
+                <div class="textfield" style="margin-bottom: 0;">
+                    <input id="checktime" class="input_text" type="text" placeholder="入住时间" readonly>
+                </div>
+
+                <div class="textfield" style="margin-bottom: 0;">
+                    <input id="leavetime" class="input_text" type="text" placeholder="离店时间" readonly>
+                </div>
+            </div>
+
+            <div class="left_part">
+                <div class="textfield" style="margin-bottom: 0; line-height: 50px; font-size: 20px;">
+                    预付金额：<span style="font-size: 24px;font-weight: 600;color: #f17350">￥100</span>
+                </div>
+
+                <div class="btn" onclick="makeOrder()">立即预定</div>
+            </div>
+        </div>
+
+        <div class="remind_div">预订成功！订单号已发送到您的邮箱。<br><span>3</span>秒后刷新页面</div>
+    </div>
+    <a style="display: none"></a>
+</div>
+
 <div class="bottom_nav">@CopyRight howSure</div>
 
 <script src="../../js/jquery.js"></script>
 <script src="../../js/homepage.js"></script>
 <script src="../../js/userorder.js"></script>
+<script src="../../js/datetimepicker.js"></script>
+<script>
+    $("#checktime").datetimepicker({
+        lang: 'ch',
+        timepicker: true,
+        format: 'Y-m-d H:i'
+    });
+    $("#leavetime").datetimepicker({
+        lang: 'ch',
+        timepicker: true,
+        format: 'Y-m-d H:i'
+    });
+</script>
 </body>
 </html>

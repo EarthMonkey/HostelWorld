@@ -3,6 +3,8 @@ package service;
 import common.RespInfo;
 import model.HostelInfo;
 
+import java.util.List;
+
 /**
  * Created by L.H.S on 2017/3/12.
  */
@@ -23,4 +25,7 @@ public interface HostelService {
 
     // 根据订单查询
     RespInfo getTheOrder(int orderId, int hosId);
+
+    // 查询客栈
+    List<HostelInfo> searchHostel(String key, String condition);
 }

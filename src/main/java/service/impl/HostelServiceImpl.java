@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import service.HostelService;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by L.H.S on 2017/3/12.
@@ -108,6 +109,15 @@ public class HostelServiceImpl implements HostelService {
             }
         } else {
             return new RespInfo(false, "订单号不存在", "");
+        }
+    }
+
+    public List<HostelInfo> searchHostel(String key, String condition) {
+
+        if (condition.equals("location")) {
+            return hostelInfoDao.getHostelByLocation(key);
+        } else {
+            return hostelInfoDao.getHostelByName(key);
         }
     }
 }

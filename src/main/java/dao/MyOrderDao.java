@@ -21,4 +21,6 @@ public interface MyOrderDao {
     MyOrder getTheOrder(int orderId);
 
     void updateOrder(int orderId, int roomId);
+
+    int insert(MyOrder order);
 }

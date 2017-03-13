@@ -63,4 +63,10 @@ public class MyOrderDaoImpl implements MyOrderDao {
 
         session.update(order);
     }
+
+    public int insert(MyOrder order) {
+
+        sessionFactory.getCurrentSession().save(order);
+        return order.getId();
+    }
 }

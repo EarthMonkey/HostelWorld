@@ -33,8 +33,7 @@ public class MyOrder implements Serializable {
     public MyOrder() {
     }
 
-    public MyOrder(int id, int userId, int hostelId, String hostelname, String location, String room, String ordertime, String checkintime, String leavetime, double pay, String phone, String username, String orderstate, String checkstate) {
-        this.id = id;
+    public MyOrder(int userId, int hostelId, String hostelname, String location, String room, String ordertime, String checkintime, String leavetime, double pay, String phone, String username, String orderstate, String checkstate) {
         this.userId = userId;
         this.hostelname = hostelname;
         this.location = location;
