@@ -155,3 +155,19 @@ function approve(state) {
     });
 
 }
+
+function logout() {
+    $.ajax({
+        type: "POST",
+        url: "/user/Logout",
+        data: {
+            attr: "userId"
+        },
+        success: function () {
+            location.href = "ManagerLogin.jsp"
+        },
+        error: function () {
+            alert("登出失败");
+        }
+    });
+}

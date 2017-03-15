@@ -26,8 +26,8 @@
     </div>
     <div class="sub_nav native">审批</div>
     <div class="sub_nav" onclick="window.location.href='ManagerFinance.jsp'">财务统计</div>
-    <div class="message_div">
-        <img src="../../image/message.png">
+    <div class="message_div" onclick="logout()">
+        <i class="fa fa-sign-out"></i>
     </div>
 </div>
 

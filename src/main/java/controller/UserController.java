@@ -101,4 +101,9 @@ public class UserController {
         int userId = (Integer) session.getAttribute("userId");
         orderService.insert(userId, hosId, checktime, leavetime, pay);
     }
+
+    @RequestMapping("/Logout")
+    public void logout(HttpSession session, @RequestParam String attr) {
+        session.setAttribute(attr, null);
+    }
 }

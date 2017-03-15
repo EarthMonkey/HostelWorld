@@ -25,8 +25,8 @@
     </div>
     <div class="sub_nav native">预定</div>
     <div class="sub_nav" onclick="window.location.href='MyWorld.jsp'">我的world</div>
-    <div class="message_div">
-        <img src="../../image/message.png">
+    <div class="message_div" onclick="logout()">
+        <i class="fa fa-sign-out"></i>
     </div>
 </div>
 

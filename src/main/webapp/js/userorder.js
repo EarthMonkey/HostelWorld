@@ -145,3 +145,19 @@ function reloadPage(id) {
 
     setTimeout("window.location.reload();", 3000);
 }
+
+function logout() {
+    $.ajax({
+        type: "POST",
+        url: "/user/Logout",
+        data: {
+            attr: "userId"
+        },
+        success: function () {
+            location.href = "../HomePage.jsp"
+        },
+        error: function () {
+            alert("登出失败");
+        }
+    });
+}

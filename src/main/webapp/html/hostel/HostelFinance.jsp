@@ -23,13 +23,14 @@
     </div>
     <div class="sub_nav" onclick="window.location.href='HostelBusiness.jsp'">业务</div>
     <div class="sub_nav native">财务统计</div>
-    <div class="message_div">
-        <img src="../../image/message.png">
+    <div class="message_div" onclick="logout()">
+        <i class="fa fa-sign-out"></i>
     </div>
 </div>
 
 
 <div class="bottom_nav" style="margin-top: 0;">@CopyRight howSure</div>
 <script src="../../js/jquery.js"></script>
+<script src="../../js/hostelfinance.js"></script>
 </body>
 </html>

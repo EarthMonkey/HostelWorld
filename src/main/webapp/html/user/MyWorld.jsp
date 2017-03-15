@@ -24,8 +24,8 @@
     </div>
     <div class="sub_nav" onclick="window.location.href='UserOrder.jsp'">预定</div>
     <div class="sub_nav native">我的world</div>
-    <div class="message_div">
-        <img src="../../image/message.png">
+    <div class="message_div" onclick="logout()">
+        <i class="fa fa-sign-out"></i>
     </div>
 </div>
 
