@@ -36,4 +36,8 @@ public class BillDaoImpl implements BillDao {
 
         return list;
     }
+
+    public void insert(Bill bill) {
+        sessionFactory.getCurrentSession().save(bill);
+    }
 }

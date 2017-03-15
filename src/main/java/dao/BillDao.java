@@ -13,4 +13,5 @@ public interface BillDao {
 
     List<Bill> getBills(int userId, String year, String month);
 
+    void insert(Bill bill);
 }

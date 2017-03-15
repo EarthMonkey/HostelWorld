@@ -2,7 +2,9 @@ package service.impl;
 
 import common.RespInfo;
 import common.SendEmail;
+import dao.BillDao;
 import dao.MyOrderDao;
+import model.Bill;
 import model.HostelInfo;
 import model.MyOrder;
 import model.User;
@@ -31,6 +33,8 @@ public class OrderServiceImpl implements OrderService {
     UserService userService;
     @Autowired
     HostelService hostelService;
+    @Autowired
+    BillDao billDao;
 
     public List<MyOrder> getFutureOrder(int userId) {
 
@@ -57,10 +61,16 @@ public class OrderServiceImpl implements OrderService {
                 checktime, leavetime, pay, user.getPhone(), user.getUsername(), "future", "notchecked");
 
         int orderId = orderDao.insert(order);
+        // 存储到账单
+        String timestr[] = ordertime.split(" ");
+        String yearm[] = timestr[0].split("-");
+        Bill bill = new Bill(userId, timestr[0], pay, hostel.getName(), yearm[0], yearm[1]);
+        billDao.insert(bill);
+
         String email = user.getEmail();
         String info = "恭喜您！<br>您已在 <span style='font-size: 18px; font-weight: 500;'>" + hostel.getName() + "</span> 客栈" +
                 "预定成功！<br>您的订单号是：<span style='font-size: 18px; font-weight: 400;'>" + orderId + "</span>" +
-               "<br>可在@<a href='http://localhost:8082/html/HomePage.jsp'>HostelWorld</a>的个人页面查看";
+                "<br>可在@<a href='http://localhost:8082/html/HomePage.jsp'>HostelWorld</a>的个人页面查看";
         RespInfo respInfo = new RespInfo(true, info, email);
 
         SendEmail sendEmail = new SendEmail(respInfo);
