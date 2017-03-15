@@ -40,6 +40,7 @@ public class UserDaoImpl implements UserDao {
         Session session = sessionFactory.getCurrentSession();
         User user = (User) session.load(User.class, userId);
         user.setBalance(balance);
+        user.setPoint((int)balance);
         session.update(user);
     }
 
@@ -88,6 +89,26 @@ public class UserDaoImpl implements UserDao {
         } else {
             return new RespInfo(false, "无效的工作编号", "");
         }
+    }
+
+    public void charge(int userId, double charge) {
+
+        Session session = sessionFactory.getCurrentSession();
+        User user = (User) session.load(User.class, userId);
+        double balance = user.getBalance();
+        user.setBalance(balance + charge);
+        user.setPoint(user.getPoint() + (int) charge);
+
+        if (user.getPoint() < 5000) {
+            user.setLevel("黄金会员");
+        } else if (user.getPoint() < 20000) {
+            user.setLevel("铂金会员");
+        } else if (user.getPoint() < 100000) {
+            user.setLevel("钻石会员");
+        } else {
+            user.setLevel("黑卡贵宾");
+        }
+        session.update(user);
     }
 }
 

@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void setBalance(int userId, double balance) {
+
         userDao.setBalance(userId, balance);
     }
 
@@ -84,5 +85,9 @@ public class UserServiceImpl implements UserService {
         } else {
             return new RespInfo(false, respInfo.getInfo(), "");
         }
+    }
+
+    public void recharge(int userId, double charge) {
+        userDao.charge(userId, charge);
     }
 }

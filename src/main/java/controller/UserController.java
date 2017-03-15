@@ -106,4 +106,11 @@ public class UserController {
     public void logout(HttpSession session, @RequestParam String attr) {
         session.setAttribute(attr, null);
     }
+
+    @RequestMapping("/Recharge")
+    public void recharge(HttpSession session, @RequestParam double charge) {
+
+        int userId = (Integer) session.getAttribute("userId");
+        userService.recharge(userId, charge);
+    }
 }

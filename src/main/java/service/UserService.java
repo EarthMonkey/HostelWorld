@@ -22,4 +22,6 @@ public interface UserService {
     void updateBankcard(int userId, String bankcard);
 
     RespInfo managerLogin(int managerId, String pwd);
+
+    void recharge(int userId, double charge);
 }

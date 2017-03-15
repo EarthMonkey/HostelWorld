@@ -217,7 +217,7 @@ function nextStep(index) {
 
         var balInput = $("#step3").find("input")[0];
         var balance = balInput.value;
-        if (balance > 2000) {
+        if (balance > 8000) {
             err_lbl.innerHTML = "余额不足";
             balInput.parentNode.appendChild(err_lbl);
             $(balInput).focus(function () {

@@ -158,7 +158,10 @@
                     <label style="display: none;" for="woman">女</label>
                 </div>
 
-                <div style="margin-left: 5px;">会员卡号：<span>1234567</span></div>
+                <div style="margin-left: 5px;">
+                    会员卡号：<span>1234567</span>，
+                </div>
+
             </div>
 
             <div class="mod_btn" onclick="modAccount()">修改</div>
@@ -199,13 +202,28 @@
             </div>
 
             <div class="each_info">
-                <div>当前积分：<span class="span_em">1600</span></div>
+                <div style="margin-top: -10px;">
+                    账户余额：<span class="span_em">1000</span>元
+                    <i class="recharge" onclick="$('#rechargeDiv').slideDown()">充值</i>
+                </div>
+
+                <div style="margin-top: -5px;">当前积分：<span class="span_em">1600</span></div>
                 <div class="note_div">·可抵用 <span>16</span> 元</div>
 
-                <div style="margin-top: 15px;">会员等级：<span class="span_em">大众会员</span></div>
+                <div style="margin-top: 10px;">会员等级：<span class="span_em">大众会员</span></div>
                 <div class="note_div">·还需消费 <span>400</span> 元可升级为 <span>黄金会员</span></div>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="rechargeDiv" class="charge_div">
+    <div style="margin: 30px 50px;">
+        <input class="mod_field mod_state" type="text" placeholder="请输入充值金额">
+    </div>
+    <div style="width: 170px; margin: 10px auto;">
+        <div class="step_btn" style="margin-right: 20px; background-color: #32af32" onclick="reCharge()">充值</div>
+        <div class="step_btn" onclick="$('#rechargeDiv').slideUp()">取消</div>
     </div>
 </div>
 

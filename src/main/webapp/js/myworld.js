@@ -97,7 +97,7 @@ function setOrder(data, parent) {
     for (var i = 0; i < data.length; i++) {
         var div = $("<div class='each_record'></div>");
         div.html(copy.html());
-        
+
         var spans = div.find("span");
         spans[0].innerHTML = data[i].id;
         spans[1].innerHTML = data[i].hostelname;
@@ -113,7 +113,7 @@ function setOrder(data, parent) {
         if (parent.attr("id") == "historyDiv") {
             div.find(".record_btn").hide();
         } else {
-            
+
             var cancelBtn = div.find(".record_btn")[0];
             $(cancelBtn).click(function () {
                 cancelOrder(this.parentNode);
@@ -229,23 +229,6 @@ function initBill() {
             alert("获取账单失败");
         }
     });
-
-    // for (var i = 0; i < 3; i++) {
-    //     var billDiv = document.createElement("div");
-    //     billDiv.className = "bill_div";
-    //     billDiv.innerHTML = billCopy.innerHTML;
-    //
-    //     var itemParent = $(billDiv).find(".items_div");
-    //     for (var j = 0; j < 5 - i; j++) {
-    //         var itemDiv = document.createElement("div");
-    //         itemDiv.className = "each_item";
-    //         itemDiv.innerHTML = itemCopy.innerHTML;
-    //
-    //         itemParent.append($(itemDiv));
-    //     }
-    //
-    //     parent.append($(billDiv));
-    // }
 }
 
 function initAccount() {
@@ -274,13 +257,18 @@ function initAccount() {
     var credit = $(info[1]).find("input")[0];
     credit.value = USER_INFO.bankcard;
 
-    var cost = 0; ////
     var spans = $(info[2]).find("span");
-    spans[0].innerHTML = cost;
-    spans[1].innerHTML = Math.floor(cost / 100);
-    spans[2].innerHTML = USER_INFO.level;
-    spans[3].innerHTML = 1000;
-    spans[4].innerHTML = "黄金会员";
+    spans[0].innerHTML = USER_INFO.balance;
+    spans[1].innerHTML = USER_INFO.point;
+    spans[2].innerHTML = Math.floor(USER_INFO.point / 100);
+    spans[3].innerHTML = USER_INFO.level;
+
+    var levels = ["大众会员", "黄金会员", "铂金会员", "钻石会员", "黑卡贵宾"];
+    var limits = [1000, 5000, 20000, 100000, 100000000];
+    var pos = levels.indexOf(USER_INFO.level);
+
+    spans[4].innerHTML = limits[pos] - USER_INFO.point;
+    spans[5].innerHTML = levels[pos + 1];
 }
 
 var infoOld = ["", "", "", "", ""]; //用户名, 性别, 生日, 手机号, 邮箱
@@ -466,6 +454,29 @@ function logout() {
         },
         error: function () {
             alert("登出失败");
+        }
+    });
+}
+
+function reCharge() {
+
+    var charge = $("#rechargeDiv").find("input").val();
+    if (charge == "") {
+        $("#rechargeDiv").find("input").focus();
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/user/Recharge",
+        data: {
+            charge: charge
+        },
+        success: function () {
+            location.reload();
+        },
+        error: function () {
+            alert("充值失败");
         }
     });
 }

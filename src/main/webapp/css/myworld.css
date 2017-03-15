@@ -362,7 +362,48 @@ input[type="radio"] {
     display: none;
 }
 
-.credit_con .exchange_card{
+.credit_con .exchange_card {
     font-size: 20px;
     margin-right: 10px;
+}
+
+.recharge {
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    color: #f17350;
+    text-shadow: 0 0 6px #ffeb00;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.charge_div {
+    width: 300px;
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -120px 0 0 -150px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    background-color: #fdf9f5;
+    z-index: 1000;
+    display: none;
+}
+
+.step_btn {
+    width: 70px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    font-size: 17px;
+    transition: 0.3s;
+    cursor: pointer;
+    background-color: #d4692a;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.step_btn:hover {
+    opacity: 0.7;
 }
