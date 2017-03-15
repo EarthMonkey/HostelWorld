@@ -89,7 +89,6 @@
                     <div class="tip_con">预订人：<span class="content">李昊朔</span></div>
                 </div>
                 <div class="record_btn">退订</div>
-                <div class="record_btn" style="top: 45px;">修改</div>
             </div>
         </div>
 

@@ -97,7 +97,7 @@ function setOrder(data, parent) {
     for (var i = 0; i < data.length; i++) {
         var div = $("<div class='each_record'></div>");
         div.html(copy.html());
-
+        
         var spans = div.find("span");
         spans[0].innerHTML = data[i].id;
         spans[1].innerHTML = data[i].hostelname;
@@ -112,11 +112,35 @@ function setOrder(data, parent) {
 
         if (parent.attr("id") == "historyDiv") {
             div.find(".record_btn").hide();
+        } else {
+            
+            var cancelBtn = div.find(".record_btn")[0];
+            $(cancelBtn).click(function () {
+                cancelOrder(this.parentNode);
+            });
         }
 
         parent.append(div);
     }
+}
 
+function cancelOrder(node) {
+
+    var orderId = $(node).find("span")[0].innerHTML;
+
+    $.ajax({
+        type: "POST",
+        url: "/order/cancelOrder",
+        data: {
+            orderId: orderId
+        },
+        success: function () {
+            location.reload();
+        },
+        error: function () {
+            alert("退订失败");
+        }
+    });
 }
 
 function changeMyOrder(index) {

@@ -66,4 +66,8 @@ public class OrderServiceImpl implements OrderService {
         SendEmail sendEmail = new SendEmail(respInfo);
         sendEmail.start();
     }
+
+    public void cancelOrder(int orderId) {
+        orderDao.cancelOrder(orderId);
+    }
 }

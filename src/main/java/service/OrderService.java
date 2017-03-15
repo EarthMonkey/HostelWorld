@@ -16,4 +16,6 @@ public interface OrderService {
     List<MyOrder> getCheckin(int userId);
 
     void insert(int userId, int hosId, String checktime, String leavetime, double pay);
+
+    void cancelOrder(int orderId);
 }

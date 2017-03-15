@@ -59,7 +59,7 @@
     </div>
 
     <div class="notice_div">
-        <div style="display: inline-block; vertical-align: top;"><img src="../../image/notice.svg">本店公告：</div>
+        <div style="display: inline-block; vertical-align: top;"><img src="../../image/notice.svg">本店计划：</div>
         <div style="display: inline-block; vertical-align: top;">
             <span></span>
         </div>
@@ -218,7 +218,7 @@
 
             <div class="left_part" style="margin-top: 20px;">
                 <textarea class="text_area" style="height: 170px;"
-                          placeholder="本店公告"></textarea>
+                          placeholder="本店计划"></textarea>
             </div>
         </div>
 

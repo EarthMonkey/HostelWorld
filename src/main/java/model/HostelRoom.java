@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -14,7 +15,9 @@ import java.io.Serializable;
 public class HostelRoom implements Serializable {
 
     @Id
+    @GeneratedValue
     private int id;
+
     private int roomId;
     private int hostelId;
     private String isempty;

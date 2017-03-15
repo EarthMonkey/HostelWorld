@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Repository
-public class HostelRoomDaoImpl implements HostelRoomDao{
+public class HostelRoomDaoImpl implements HostelRoomDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -36,5 +36,11 @@ public class HostelRoomDaoImpl implements HostelRoomDao{
         HostelRoom room = getRoom(hosId, roomId);
         room.setIsempty(state);
         sessionFactory.getCurrentSession().update(room);
+    }
+
+    public void insertRoom(int hosId, int roomId) {
+
+        HostelRoom room = new HostelRoom(roomId, hosId, "empty");
+        sessionFactory.getCurrentSession().save(room);
     }
 }

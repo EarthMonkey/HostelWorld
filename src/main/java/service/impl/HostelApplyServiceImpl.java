@@ -5,9 +5,11 @@ import common.SendEmail;
 import dao.HostelApplyDao;
 import dao.HostelInfoDao;
 import dao.HostelRegisterDao;
+import dao.HostelRoomDao;
 import model.HostelApply;
 import model.HostelInfo;
 import model.HostelRegister;
+import model.HostelRoom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.HostelApplyService;
@@ -30,6 +32,8 @@ public class HostelApplyServiceImpl implements HostelApplyService {
     private HostelRegisterDao registerDao;
     @Autowired
     private HostelInfoDao infoDao;
+    @Autowired
+    private HostelRoomDao roomDao;
 
     public void apply(String applyer, String phone,
                       String email, String identity, String hostelname,
@@ -119,9 +123,13 @@ public class HostelApplyServiceImpl implements HostelApplyService {
         registerDao.updateState(regId);
         HostelApply ha = applyDao.getTheApply(applyId);
         HostelInfo hi = new HostelInfo(applyId, pwd, ha.getHostelname(), ha.getLocation(),
-                ha.getDescription(), ha.getApplyer(), ha.getPhone(), ha.getEmail(), "", 100);
+                ha.getDescription(), ha.getApplyer(), ha.getPhone(), ha.getEmail(), "", 10);
 
         registerDao.insertInfo(hi);
+
+        for (int i=101; i<111; i++) {
+            roomDao.insertRoom(applyId, i);
+        }
     }
 
     public void modApply(int hosId, String applyer, String phone, String email, String hostelname,

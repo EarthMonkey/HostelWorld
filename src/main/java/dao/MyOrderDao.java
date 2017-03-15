@@ -23,4 +23,7 @@ public interface MyOrderDao {
     void updateOrder(int orderId, int roomId);
 
     int insert(MyOrder order);
+
+    // 退订
+    void cancelOrder(int orderId);
 }

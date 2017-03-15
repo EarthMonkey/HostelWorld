@@ -69,4 +69,13 @@ public class MyOrderDaoImpl implements MyOrderDao {
         sessionFactory.getCurrentSession().save(order);
         return order.getId();
     }
+
+    public void cancelOrder(int orderId) {
+
+        Session session = sessionFactory.getCurrentSession();
+        MyOrder order = (MyOrder) session.load(MyOrder.class, orderId);
+        order.setOrderstate("history");
+        order.setCheckstate("cancel");
+        session.update(order);
+    }
 }
