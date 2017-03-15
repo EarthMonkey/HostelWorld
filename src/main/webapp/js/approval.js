@@ -37,7 +37,7 @@ function getApprove() {
                 var div = $("<div class='approve_div'></div>");
                 div.html(approve_copy.html());
 
-                if(resp[i].applytype == "modify") {
+                if (resp[i].applytype == "modify") {
                     $(div.find("span")[0]).html("修改信息申请");
                 }
 
@@ -69,7 +69,7 @@ function getApprove() {
                 $(div.find("span")[1]).html(resp[i].applytime);
                 $(div.find("a")[0]).html(i);
 
-                if(resp[i].applytype == "modify") {
+                if (resp[i].applytype == "modify") {
                     $(div.find("span")[0]).html("修改信息申请");
                 }
 

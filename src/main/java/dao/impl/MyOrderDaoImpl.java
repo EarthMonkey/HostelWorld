@@ -78,4 +78,29 @@ public class MyOrderDaoImpl implements MyOrderDao {
         order.setCheckstate("cancel");
         session.update(order);
     }
+
+    public double getOrderPay(int hosId) {
+
+        String hql = "select sum(pay) from MyOrder where hostelId=" + hosId;
+        double total = 0;
+        List list = sessionFactory.getCurrentSession().createQuery(hql).list();
+        if (list.get(0) != null) {
+            total = Double.parseDouble(list.get(0).toString());
+        }
+
+        return total/100;
+    }
+
+    public int getOrderNum(int hosId) {
+
+        String hql = "select count(*) from MyOrder where hostelId=" + hosId;
+
+        int total = 0;
+        List list = sessionFactory.getCurrentSession().createQuery(hql).list();
+        if (list.get(0) != null) {
+            total = Integer.parseInt(list.get(0).toString());
+        }
+
+        return total;
+    }
 }

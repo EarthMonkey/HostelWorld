@@ -1,6 +1,7 @@
 package controller;
 
 import common.RespInfo;
+import common.TotalFinance;
 import model.HostelApply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.HostelApplyService;
+import service.HostelService;
 import service.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +30,8 @@ public class ManagerController {
     private HostelApplyService applyService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private HostelService hostelService;
 
 
     @RequestMapping("/getToApprove")
@@ -58,6 +62,14 @@ public class ManagerController {
 
         int approverId = (Integer) session.getAttribute("managerId");
         applyService.updateState(applyId, state, approverId);
+    }
+
+    @RequestMapping("/getTotalFinance")
+    public TotalFinance getBarChart(HttpSession session) {
+
+//        int managerId = (Integer) session.getAttribute("managerId");
+
+        return hostelService.getTotalFinance();
     }
 
 }

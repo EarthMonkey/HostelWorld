@@ -8,4 +8,6 @@ import model.CheckOut;
 public interface CheckoutDao {
 
     void insert(CheckOut checkOut);
+
+    double getOutPay(int hosId);
 }

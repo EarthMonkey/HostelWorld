@@ -1,6 +1,7 @@
 package service;
 
 import common.RespInfo;
+import common.TotalFinance;
 import model.HostelInfo;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface HostelService {
 
     // 查询客栈
     List<HostelInfo> searchHostel(String key, String condition);
+
+    // 总经理获取所有统计信息
+    TotalFinance getTotalFinance();
 }

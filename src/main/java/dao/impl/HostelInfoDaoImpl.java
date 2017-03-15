@@ -67,4 +67,12 @@ public class HostelInfoDaoImpl implements HostelInfoDao {
 
         return list;
     }
+
+    public List getAllName() {
+
+        String hql = "select new list(id, name) from HostelInfo";
+        List list = sessionFactory.getCurrentSession().createQuery(hql).list();
+
+        return list;
+    }
 }

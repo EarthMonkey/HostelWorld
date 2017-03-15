@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Repository
-public class CheckinDaoImpl implements CheckinDao{
+public class CheckinDaoImpl implements CheckinDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -29,7 +29,7 @@ public class CheckinDaoImpl implements CheckinDao{
 
         Session session = sessionFactory.getCurrentSession();
         String hql = "from CheckIn c where c.roomId=" + roomId + " and c.hostelId=" + hosId + " and c.state='valid'";
-        List<CheckIn> list =  session.createQuery(hql).list();
+        List<CheckIn> list = session.createQuery(hql).list();
 
         if (list.size() == 0) {
             return null;
@@ -47,5 +47,28 @@ public class CheckinDaoImpl implements CheckinDao{
         }
 
         sessionFactory.getCurrentSession().update(checkIn);
+    }
+
+    public int getCheckNums(int hosId) {
+
+        String hql = "select count(*) from CheckIn where hostelId=" + hosId;
+        int nums = 0;
+        List list = sessionFactory.getCurrentSession().createQuery(hql).list();
+        if (list.get(0) != null) {
+            nums = Integer.parseInt(list.get(0).toString());
+        }
+        return nums;
+    }
+
+    public double getCheckPay(int hosId) {
+
+        String hql = "select sum(pay) from CheckIn where  hostelId=" + hosId + " and state='" + "valid'";
+        double pay = 0;
+        List list = sessionFactory.getCurrentSession().createQuery(hql).list();
+        if (list.get(0) != null) {
+            pay = Double.parseDouble(list.get(0).toString());
+        }
+
+        return pay/100;
     }
 }

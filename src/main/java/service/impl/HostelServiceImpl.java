@@ -1,6 +1,7 @@
 package service.impl;
 
 import common.RespInfo;
+import common.TotalFinance;
 import dao.*;
 import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import service.HostelService;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -119,5 +121,37 @@ public class HostelServiceImpl implements HostelService {
         } else {
             return hostelInfoDao.getHostelByName(key);
         }
+    }
+
+    public TotalFinance getTotalFinance() {
+
+        List hostelNames = new ArrayList();
+        List datas = new ArrayList();
+
+        List orderSales = new ArrayList();  // 订单销售额
+        List sales = new ArrayList(); // 线下销售额
+        List orders = new ArrayList(); // 订单笔数
+        List checkins = new ArrayList();  // 入住人次
+
+        List<List> hostels = hostelInfoDao.getAllName();
+        for (List info : hostels) {
+            hostelNames.add(info.get(1));
+
+            int hosId = Integer.parseInt(info.get(0).toString());
+            orderSales.add(orderDao.getOrderPay(hosId));
+            orders.add(orderDao.getOrderNum(hosId));
+            checkins.add(checkinDao.getCheckNums(hosId));
+            double eachsale = checkinDao.getCheckPay(hosId) + checkoutDao.getOutPay(hosId);
+            sales.add(eachsale);
+        }
+
+        datas.add(orderSales);
+        datas.add(sales);
+        datas.add(orders);
+        datas.add(checkins);
+
+        TotalFinance totalFinance = new TotalFinance(hostelNames, datas);
+
+        return totalFinance;
     }
 }

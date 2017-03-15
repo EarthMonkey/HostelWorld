@@ -13,7 +13,7 @@
     <link href="../../css/css_reset.css" rel="stylesheet">
     <link href="../../css/common.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link href="../../css/manager.css" rel="stylesheet">
 </head>
 <body>
 
@@ -28,9 +28,33 @@
     </div>
 </div>
 
+<div class="total_div">
+    <div class="each_total">
+        <img src="../../image/hostels.svg">
+        <div>
+            共加盟客栈<span>15</span>个
+        </div>
+    </div>
+    <div class="each_total">
+        <img src="../../image/sales.svg">
+        <div>
+            总销售额<span>20000</span>元
+        </div>
+    </div>
+    <div class="each_total">
+        <img src="../../image/trades.svg">
+        <div>
+            总成交量<span>200</span>笔
+        </div>
+    </div>
+</div>
+
+<div id="chartDiv" class="chart_div"></div>
 
 <div class="bottom_nav" style="margin-top: 0;">@CopyRight howSure</div>
 <script src="../../js/jquery.js"></script>
-<script src="../../js/approval.js"></script>
+<script src="../../js/managerfinance.js"></script>
+<script src="../../js/chart.js"></script>
+<script src="../../js/echarts.min.js"></script>
 </body>
 </html>

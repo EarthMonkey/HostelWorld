@@ -26,4 +26,10 @@ public interface MyOrderDao {
 
     // 退订
     void cancelOrder(int orderId);
+
+    // 订单总额
+    double getOrderPay(int hosId);
+
+    // 订单笔数
+    int getOrderNum(int hosId);
 }

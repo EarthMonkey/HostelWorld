@@ -20,4 +20,6 @@ public interface HostelInfoDao {
     List<HostelInfo> getHostelByLocation(String location);
 
     List<HostelInfo> getHostelByName(String name);
+
+    List getAllName();
 }
