@@ -215,7 +215,7 @@ function initBill() {
 
                     var itemSpans = itemDiv.find("div");
                     itemSpans[0].innerHTML = resp[i][j].time.substr(5);
-                    itemSpans[1].innerHTML = "-" + resp[i][j].pay;
+                    itemSpans[1].innerHTML = 0 - resp[i][j].pay;
                     itemSpans[2].innerHTML = resp[i][j].hostel;
 
                     itemParent.append(itemDiv);

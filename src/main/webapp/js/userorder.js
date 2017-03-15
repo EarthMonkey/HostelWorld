@@ -102,7 +102,7 @@ function showHostelDetail(node) {
             spans[0].innerHTML = resp.name;
             spans[1].innerHTML = resp.location;
 
-            $("#hostelDetail").find("a").html(resp.id);
+            $("#hostelDetail").find("a")[0].innerHTML = resp.id;
         },
         error: function () {
             alert("获取客栈信息失败");
@@ -112,7 +112,7 @@ function showHostelDetail(node) {
 
 function makeOrder() {
 
-    var hosId = $("#hostelDetail").find("a").html();
+    var hosId = $("#hostelDetail").find("a")[0].innerHTML;
     var checktime =  $("#checktime").val();
     var leavetime = $("#leavetime").val();
     var pay = 100;

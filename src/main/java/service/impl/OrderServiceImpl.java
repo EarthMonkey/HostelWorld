@@ -79,5 +79,11 @@ public class OrderServiceImpl implements OrderService {
 
     public void cancelOrder(int orderId) {
         orderDao.cancelOrder(orderId);
+
+        MyOrder order = orderDao.getTheOrder(orderId);
+        String ordertime[] = order.getOrdertime().split(" ");
+        String yearm[] = ordertime[0].split("-");
+        Bill bill = new Bill(order.getUserId(), ordertime[0], -order.getPay(), order.getHostelname(), yearm[0], yearm[1]);
+        billDao.insert(bill);
     }
 }

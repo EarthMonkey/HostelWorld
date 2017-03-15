@@ -35,6 +35,7 @@ public class MyOrder implements Serializable {
 
     public MyOrder(int userId, int hostelId, String hostelname, String location, String room, String ordertime, String checkintime, String leavetime, double pay, String phone, String username, String orderstate, String checkstate) {
         this.userId = userId;
+        this.hostelId = hostelId;
         this.hostelname = hostelname;
         this.location = location;
         this.room = room;
