@@ -82,3 +82,58 @@
     height: 490px;
     margin: 40px auto;
 }
+
+/*================客栈财务统计=================*/
+
+.record_div {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px 0;
+    position: relative;
+}
+
+.quote_div {
+    width: 100%;
+    height: 40px;
+    margin: 5px auto;
+    line-height: 40px;
+    background-color: #fff8f6;
+    border-left: 10px solid #ffe3db;
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-size: 22px;
+    color: #f17350;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.quote_div:hover {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.quote_div i {
+    float: right;
+    margin-right: 10px;
+    margin-top: 8px;
+}
+
+.each_record {
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    background-color: rgba(252, 252, 252, 0.9);
+    display: none;
+}
+
+.each_item {
+    color: #979797;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ffe3db;
+}
+
+.each_item div {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 25px;
+}

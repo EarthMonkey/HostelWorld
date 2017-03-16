@@ -103,4 +103,11 @@ public class MyOrderDaoImpl implements MyOrderDao {
 
         return total;
     }
+
+    public List getHostelOrder(int hosId) {
+
+        String hql = "from MyOrder where hostelId=" + hosId;
+        List list = sessionFactory.getCurrentSession().createQuery(hql).list();
+        return list;
+    }
 }

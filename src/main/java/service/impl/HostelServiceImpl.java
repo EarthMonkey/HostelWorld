@@ -188,4 +188,14 @@ public class HostelServiceImpl implements HostelService {
 
         return (int) day + 1;
     }
+
+    public List getHostelRecords(int hosId) {
+
+        List list = new ArrayList();
+        list.add(checkinDao.getHostelChecks(hosId));
+        list.add(checkoutDao.getHostelCheckout(hosId));
+        list.add(orderDao.getHostelOrder(hosId));
+
+        return list;
+    }
 }

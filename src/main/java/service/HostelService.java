@@ -38,4 +38,7 @@ public interface HostelService {
 
     // 获取客栈加盟天数
     int getJoinDays(int hosId);
+
+    // 获取客栈记录；入住记录、离店记录、订单记录
+    List getHostelRecords(int hosId);
 }

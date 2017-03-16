@@ -32,4 +32,7 @@ public interface MyOrderDao {
 
     // 订单笔数
     int getOrderNum(int hosId);
+
+    // 根据hosId获取订单
+    List getHostelOrder(int hosId);
 }

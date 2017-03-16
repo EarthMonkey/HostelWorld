@@ -14,6 +14,7 @@ import service.HostelApplyService;
 import service.HostelService;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by L.H.S on 2017/3/11.
@@ -122,5 +123,12 @@ public class HostelController {
 
         int hosId = (Integer) session.getAttribute("hosId");
         return hostelService.getJoinDays(hosId);
+    }
+
+    @RequestMapping("/getHostelRecords")
+    public List getHostelRecords(HttpSession session) {
+
+        int hosId = (Integer) session.getAttribute("hosId");
+        return hostelService.getHostelRecords(hosId);
     }
 }

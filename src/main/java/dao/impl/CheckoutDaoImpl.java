@@ -32,4 +32,11 @@ public class CheckoutDaoImpl implements CheckoutDao{
         }
         return pay/100;
     }
+
+    public List getHostelCheckout(int hosId) {
+
+        String hql = "from CheckOut where hostelId=" + hosId;
+        List list = sessionFactory.getCurrentSession().createQuery(hql).list();
+        return list;
+    }
 }

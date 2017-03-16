@@ -2,6 +2,8 @@ package dao;
 
 import model.CheckIn;
 
+import java.util.List;
+
 /**
  * Created by L.H.S on 2017/3/9.
  */
@@ -18,4 +20,7 @@ public interface CheckinDao {
 
     // valid状态且 userId = -1 的checkin金额
     double getCheckPay(int hosId);
+
+    // 根据客栈获取入住登记
+    List getHostelChecks(int hosId);
 }

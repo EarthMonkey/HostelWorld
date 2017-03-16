@@ -71,4 +71,11 @@ public class CheckinDaoImpl implements CheckinDao {
 
         return pay/100;
     }
+
+    public List getHostelChecks(int hosId) {
+
+        String hql = "from CheckIn where hostelId=" + hosId;
+        List list = sessionFactory.getCurrentSession().createQuery(hql).list();
+        return list;
+    }
 }
