@@ -2,6 +2,7 @@ package controller;
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import common.RespInfo;
+import common.TotalFinance;
 import model.HostelInfo;
 import org.jboss.logging.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,5 +108,19 @@ public class HostelController {
 
         int hosId = (Integer) session.getAttribute("hosId");
         return hostelService.getTheOrder(orderId, hosId);
+    }
+
+    @RequestMapping("/getHostelFinance")
+    public TotalFinance getHostelFinance(HttpSession session) {
+
+        int hosId = (Integer) session.getAttribute("hosId");
+        return hostelService.getHostelFinance(hosId);
+    }
+
+    @RequestMapping("/getJoinDays")
+    public int getJoinDays(HttpSession session) {
+
+        int hosId = (Integer) session.getAttribute("hosId");
+        return hostelService.getJoinDays(hosId);
     }
 }

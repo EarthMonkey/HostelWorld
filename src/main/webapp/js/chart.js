@@ -2,6 +2,7 @@
  * Created by L.H.S on 2017/3/15.
  */
 
+// 总经理
 function getManagerBar(id, data) {
 
     var myChart = echarts.init(document.getElementById(id));
@@ -17,7 +18,7 @@ function getManagerBar(id, data) {
             }
         },
         legend: {
-            data: ['线上订单额(百元)', '线下经营额(百元)','订单笔数','入住人次']
+            data: ['线上订单额(百元)', '线下经营额(百元)', '订单笔数', '入住人次']
         },
         grid: {
             top: '10%',
@@ -35,7 +36,7 @@ function getManagerBar(id, data) {
         },
         series: [
             {
-                name: '线上订单额',
+                name: '线上订单额(百元)',
                 type: 'bar',
                 stack: '总量',
                 label: {
@@ -47,7 +48,7 @@ function getManagerBar(id, data) {
                 data: sales[0]
             },
             {
-                name: '线下经营额',
+                name: '线下经营额(百元)',
                 type: 'bar',
                 stack: '总量',
                 label: {
@@ -84,6 +85,53 @@ function getManagerBar(id, data) {
             }
         ]
     };
+
+    myChart.setOption(option);
+}
+
+// 客栈
+function getHostelBar(id, data) {
+
+    var myChart = echarts.init(document.getElementById(id));
+
+    var option = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ['线上订单额(百元)', '线下经营额(百元)', '订单笔数', '入住人次'],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '',
+                type: 'bar',
+                barWidth: '30%',
+                data: data
+            }
+        ]
+    };
+
 
     myChart.setOption(option);
 }

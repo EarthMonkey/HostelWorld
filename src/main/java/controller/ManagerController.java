@@ -67,8 +67,6 @@ public class ManagerController {
     @RequestMapping("/getTotalFinance")
     public TotalFinance getBarChart(HttpSession session) {
 
-//        int managerId = (Integer) session.getAttribute("managerId");
-
         return hostelService.getTotalFinance();
     }
 

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import service.HostelService;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +32,8 @@ public class HostelServiceImpl implements HostelService {
     private CheckoutDao checkoutDao;
     @Autowired
     private MyOrderDao orderDao;
+    @Autowired
+    private HostelApplyDao applyDao;
 
     public RespInfo hostelLogin(int hostelId, String pwd) {
 
@@ -153,5 +157,35 @@ public class HostelServiceImpl implements HostelService {
         TotalFinance totalFinance = new TotalFinance(hostelNames, datas);
 
         return totalFinance;
+    }
+
+    public TotalFinance getHostelFinance(int hosId) {
+
+        double eachsale = checkinDao.getCheckPay(hosId) + checkoutDao.getOutPay(hosId);
+        TotalFinance totalFinance = new TotalFinance();
+        Double[] dou = {orderDao.getOrderPay(hosId), eachsale, 1.0 * orderDao.getOrderNum(hosId), 1.0 * checkinDao.getCheckNums(hosId)};
+        totalFinance.setData(dou);
+
+        return totalFinance;
+    }
+
+    public int getJoinDays(int hosId) {
+
+        HostelApply apply = applyDao.getTheApply(hosId);
+        String beginDatestr = apply.getApplytime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        long day = 0;
+        try {
+            Date today = df.parse(df.format(new Date()));
+            Date joinDay = df.parse(beginDatestr);
+
+            day = (today.getTime() - joinDay.getTime()) / (24 * 60 * 60 * 1000);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return (int) day + 1;
     }
 }

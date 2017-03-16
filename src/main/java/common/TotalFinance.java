@@ -8,7 +8,8 @@ import java.util.List;
 public class TotalFinance {
 
     private List hostelNames;
-    private List<List> sales;
+    private List sales;
+    private Double[] data;
 
     public TotalFinance() {
     }
@@ -30,7 +31,15 @@ public class TotalFinance {
         return sales;
     }
 
-    public void setSales(List<List> sales) {
+    public void setSales(List sales) {
         this.sales = sales;
+    }
+
+    public Double[] getData() {
+        return data;
+    }
+
+    public void setData(Double[] data) {
+        this.data = data;
     }
 }

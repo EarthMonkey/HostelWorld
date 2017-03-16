@@ -32,4 +32,10 @@ public interface HostelService {
 
     // 总经理获取所有统计信息
     TotalFinance getTotalFinance();
+
+    // 客栈获取统计信息
+    TotalFinance getHostelFinance(int hosId);
+
+    // 获取客栈加盟天数
+    int getJoinDays(int hosId);
 }
