@@ -42,7 +42,7 @@ function getManagerBar(id, data) {
                 label: {
                     normal: {
                         show: true,
-                        position: 'insideRight'
+                        position: 'insideRight',
                     }
                 },
                 data: sales[0]

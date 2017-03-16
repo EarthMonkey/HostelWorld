@@ -159,7 +159,7 @@
                 </div>
 
                 <div style="margin-left: 5px;">
-                    会员卡号：<span>1234567</span>，
+                    会员卡号：<span>1234567</span>
                 </div>
 
             </div>

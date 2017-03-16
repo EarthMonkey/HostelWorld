@@ -30,7 +30,7 @@ function getFinance() {
             getHostelBar("chartDiv", datas);
 
             var spans = $(".total_div").find("span");
-            spans[1].innerHTML = (datas[0] + datas[1]) * 100;
+            spans[1].innerHTML = (datas[0] * 0.8 + datas[1]) * 100;
             spans[2].innerHTML = datas[3];
 
         },

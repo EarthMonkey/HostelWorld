@@ -38,7 +38,7 @@
     <div class="each_total">
         <img src="../../image/sales.svg">
         <div>
-            总销售额<span>20000</span>元
+            总经营额<span>20000</span>元
         </div>
     </div>
     <div class="each_total">
@@ -57,7 +57,7 @@
 
     <div>
         <div class="quote_div" onclick="toggleSlide('#checkInPart')">入店记录 <i class="fa fa-angle-down"></i></div>
-        <div id="checkInPart" class="each_record">
+        <div id="checkInPart" class="each_record" style="display: block">
             <div id="item_copy" class="each_item" style="display: none;">
                 <div style="width: 150px; margin-left: 0;"></div>
                 <div style="width: 150px;"></div>

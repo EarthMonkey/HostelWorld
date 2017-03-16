@@ -54,6 +54,11 @@ function getUserInfo() {
                 var spans = $(".info_div").find("span");
                 $(spans[0]).html(USER_INFO.username);
                 spans[1].innerHTML = USER_INFO.sex + "，" + USER_INFO.birth + "，" + USER_INFO.level;
+
+                var levels = ["大众会员", "黄金会员", "铂金会员", "钻石会员", "黑卡贵宾"];
+                var pos = levels.indexOf(USER_INFO.level) + 1;
+                var imgsrc = "../../image/mem_lv_" + pos + ".png";
+                $(".lvl_img_div").find("img").attr("src", imgsrc);
             }
         },
         error: function () {
@@ -264,7 +269,7 @@ function initAccount() {
     spans[3].innerHTML = USER_INFO.level;
 
     var levels = ["大众会员", "黄金会员", "铂金会员", "钻石会员", "黑卡贵宾"];
-    var limits = [1000, 5000, 20000, 100000, 100000000];
+    var limits = [1001, 5000, 20000, 100000, 100000000];
     var pos = levels.indexOf(USER_INFO.level);
 
     spans[4].innerHTML = limits[pos] - USER_INFO.point;
